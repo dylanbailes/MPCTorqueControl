@@ -1,0 +1,104 @@
+{
+  "plant": {
+    "Jm": 8e-05,
+    "Jl": 0.0012,
+    "ks": 1.0,
+    "knl": 0.0,
+    "Kt": 0.1,
+    "resonance_Hz": 18.37762984739307
+  },
+  "identified": {
+    "ks": 0.9848753710561304,
+    "knl": 0.0,
+    "rel_errors": {
+      "Jm": 0.0927038460384762,
+      "bm": 5.382207078018226,
+      "Jl": 0.013407680076431876,
+      "bl": 0.8001484473891909,
+      "ks": 0.015124628943869567,
+      "knl": 0.0
+    }
+  },
+  "learned_disturbance": {
+    "heldout_r2": 0.6210900554040584,
+    "beta": [
+      0.0047152395574856405,
+      0.014438542822629468,
+      -0.003303143609733057,
+      0.003203349370770145,
+      -0.010343646375785616,
+      0.0007329122914681925,
+      0.0025163449589482626,
+      -0.001776791547641222,
+      -0.00920115211722134
+    ]
+  },
+  "tracking": {
+    "smooth": {
+      "PID": {
+        "rms_error_mNm": 32.876665428584325,
+        "max_error_mNm": 80.47000737862759,
+        "rms_error_overall_mNm": 35.58685522288882
+      },
+      "MPC": {
+        "rms_error_mNm": 5.6776863230609775,
+        "max_error_mNm": 43.363079289148956,
+        "rms_error_overall_mNm": 15.561569252617806
+      },
+      "MPC+FF-ID": {
+        "rms_error_mNm": 5.534406137954262,
+        "max_error_mNm": 42.98538431473348,
+        "rms_error_overall_mNm": 15.622059135777658
+      },
+      "MPC+learned": {
+        "rms_error_mNm": 5.654878786808917,
+        "max_error_mNm": 42.22999436590258,
+        "rms_error_overall_mNm": 13.223391023364314
+      }
+    },
+    "edges": {
+      "PID": {
+        "rms_error_mNm": 41.81790381106476,
+        "max_error_mNm": 133.66100045050268,
+        "rms_error_overall_mNm": 42.37821876609245
+      },
+      "MPC": {
+        "rms_error_mNm": 22.616294347055558,
+        "max_error_mNm": 132.0115079950036,
+        "rms_error_overall_mNm": 28.042069511899573
+      },
+      "MPC+learned": {
+        "rms_error_mNm": 19.336709983392325,
+        "max_error_mNm": 115.5043332644254,
+        "rms_error_overall_mNm": 24.145189886665108
+      }
+    }
+  },
+  "disturbance": {
+    "PID": {
+      "peak_error_mNm": 48.33635665452552,
+      "steady_error_mNm": 15.793148780602298
+    },
+    "MPC": {
+      "peak_error_mNm": 3.0793954027988626,
+      "steady_error_mNm": 1.0831885103681382
+    },
+    "MPC+learned": {
+      "peak_error_mNm": 3.765040519727092,
+      "steady_error_mNm": 0.9081898388889811
+    }
+  },
+  "collision": {
+    "detected": true,
+    "grab_time_s": 0.1,
+    "detection_latency_ms": 101.5,
+    "post_collision_peak_torque_mNm": 201.29771992514026
+  },
+  "mpc": {
+    "solver": "admm",
+    "qp_iterations": 20,
+    "horizon_steps": 20,
+    "period_ms": 0.5
+  },
+  "wall_seconds": 257.93226957321167
+}

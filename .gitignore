@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Build / tooling
+build/
+dist/
+*.o
+*.elf
+*.bin
+*.hex
+*.map
+
+# IDE
+.vscode/
+.idea/
+STM32CubeIDE/
+*.ioc.bak
+
+# Generated experiment artifacts (keep plots/JSON in results/ if you want them committed;
+# uncomment to ignore instead)
+# results/plots/*.png
+# results/*.json
+
+# OS
+.DS_Store
+Thumbs.db
