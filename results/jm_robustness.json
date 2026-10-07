@@ -1,0 +1,155 @@
+{
+  "true_Jm": 3e-05,
+  "cfg": {
+    "N": 30,
+    "u_max": 3.0,
+    "du_max": 1.5
+  },
+  "baseline_model_Jm": 3e-05,
+  "baseline": {
+    "smooth_rms_mNm": 2.361301896816021,
+    "edges_rms_mNm": 6.102575216269434
+  },
+  "rows": [
+    {
+      "mult": -0.75,
+      "jm_model": 7.5e-06,
+      "smooth_rms_mNm": 1.9474866479195867,
+      "smooth_max_mNm": 4.8746644635615235,
+      "edges_rms_mNm": 7.48498915975202,
+      "edges_max_mNm": 100.96698009972486,
+      "peak_u_cmd_A": 3.0,
+      "u_max": 3.0
+    },
+    {
+      "mult": -0.5,
+      "jm_model": 1.5e-05,
+      "smooth_rms_mNm": 2.0727570511396607,
+      "smooth_max_mNm": 5.025981325122969,
+      "edges_rms_mNm": 7.249655246985951,
+      "edges_max_mNm": 100.96698009972486,
+      "peak_u_cmd_A": 3.0,
+      "u_max": 3.0
+    },
+    {
+      "mult": -0.3,
+      "jm_model": 2.1e-05,
+      "smooth_rms_mNm": 2.193803766188942,
+      "smooth_max_mNm": 5.258159660532918,
+      "edges_rms_mNm": 6.813157094493664,
+      "edges_max_mNm": 100.96698009972486,
+      "peak_u_cmd_A": 3.0,
+      "u_max": 3.0
+    },
+    {
+      "mult": -0.15,
+      "jm_model": 2.55e-05,
+      "smooth_rms_mNm": 2.2797599348429327,
+      "smooth_max_mNm": 5.409476522094364,
+      "edges_rms_mNm": 6.251926826012604,
+      "edges_max_mNm": 100.96698009972486,
+      "peak_u_cmd_A": 3.0,
+      "u_max": 3.0
+    },
+    {
+      "mult": 0.0,
+      "jm_model": 3e-05,
+      "smooth_rms_mNm": 2.361301896816021,
+      "smooth_max_mNm": 5.4412928277071115,
+      "edges_rms_mNm": 6.102575216269434,
+      "edges_max_mNm": 100.96698009972486,
+      "peak_u_cmd_A": 3.0,
+      "u_max": 3.0
+    },
+    {
+      "mult": 0.3,
+      "jm_model": 3.9e-05,
+      "smooth_rms_mNm": 2.509877676975752,
+      "smooth_max_mNm": 5.792971719065787,
+      "edges_rms_mNm": 6.16316732397144,
+      "edges_max_mNm": 100.96698009972486,
+      "peak_u_cmd_A": 3.0,
+      "u_max": 3.0
+    },
+    {
+      "mult": 0.5,
+      "jm_model": 4.5e-05,
+      "smooth_rms_mNm": 2.6000540690457465,
+      "smooth_max_mNm": 6.0257122923697555,
+      "edges_rms_mNm": 6.189054725124363,
+      "edges_max_mNm": 100.58348490275344,
+      "peak_u_cmd_A": 3.0,
+      "u_max": 3.0
+    },
+    {
+      "mult": 1.0,
+      "jm_model": 6e-05,
+      "smooth_rms_mNm": 2.8022031954955557,
+      "smooth_max_mNm": 6.615283143169143,
+      "edges_rms_mNm": 6.27850966322368,
+      "edges_max_mNm": 100.96698009972486,
+      "peak_u_cmd_A": 3.0,
+      "u_max": 3.0
+    },
+    {
+      "mult": 2.0,
+      "jm_model": 9e-05,
+      "smooth_rms_mNm": 3.1346286549728606,
+      "smooth_max_mNm": 7.449300110060536,
+      "edges_rms_mNm": 6.063880808732249,
+      "edges_max_mNm": 100.58348490275344,
+      "peak_u_cmd_A": 3.0,
+      "u_max": 3.0
+    },
+    {
+      "mult": 3.0,
+      "jm_model": 0.00012,
+      "smooth_rms_mNm": 3.407622498953806,
+      "smooth_max_mNm": 8.149263931054806,
+      "edges_rms_mNm": 6.217629688291705,
+      "edges_max_mNm": 100.58348490275344,
+      "peak_u_cmd_A": 3.0,
+      "u_max": 3.0
+    },
+    {
+      "mult": 4.0,
+      "jm_model": 0.00015000000000000001,
+      "smooth_rms_mNm": 3.6417952405229723,
+      "smooth_max_mNm": 8.781653135046085,
+      "edges_rms_mNm": 6.344771537605285,
+      "edges_max_mNm": 100.58348490275344,
+      "peak_u_cmd_A": 3.0,
+      "u_max": 3.0
+    },
+    {
+      "mult": 5.0,
+      "jm_model": 0.00018,
+      "smooth_rms_mNm": 3.84865359497011,
+      "smooth_max_mNm": 9.244415374206477,
+      "edges_rms_mNm": 102.13818797961943,
+      "edges_max_mNm": 404.58519542472015,
+      "peak_u_cmd_A": 3.0,
+      "u_max": 3.0
+    },
+    {
+      "mult": 6.0,
+      "jm_model": 0.00021,
+      "smooth_rms_mNm": 4.035052588111703,
+      "smooth_max_mNm": 9.750271291889018,
+      "edges_rms_mNm": 215.84762324760098,
+      "edges_max_mNm": 491.78680611970253,
+      "peak_u_cmd_A": 3.0,
+      "u_max": 3.0
+    },
+    {
+      "mult": 8.0,
+      "jm_model": 0.00027,
+      "smooth_rms_mNm": 217.97754836431517,
+      "smooth_max_mNm": 452.51567400310023,
+      "edges_rms_mNm": 217.95147119011892,
+      "edges_max_mNm": 439.70100389455,
+      "peak_u_cmd_A": 3.0,
+      "u_max": 3.0
+    }
+  ]
+}

@@ -39,7 +39,7 @@ steady-state    — the residual after settling (integral action / model)
 PID's steady state is set by its integrator's gain and the friction that
 remains; MPC's is set by how well the model predicts the persistent
 disturbance and commands compensating current. In sim: PID 15.8 mN·m vs
-MPC 1.08 mN·m steady-state — 15×. On hardware you will *not* see 15×
+MPC 1.06 mN·m steady-state — 15×. On hardware you will *not* see 15×
 (noise, current-loop lag, model error) — 5–10× is a good outcome, and the
 explanation ("the residual gap is the unmodeled part, which week 12's
 learning attacks") is the thesis of the project.
@@ -100,7 +100,7 @@ If MPC doesn't clearly win, in order of likelihood:
 ## Verification
 
 - Table complete: 2×3×3, means + spreads, all metrics defined.
-- MPC/PID ratio on smooth RMS ≥ 2× (sim says ~5.8×; hardware 2–6×).
+- MPC/PID ratio on smooth RMS ≥ 2× (sim says ~8×; hardware 2–6×).
 - MPC/PID ratio on disturbance steady-state ≥ 4× (sim says ~15×).
 - The gap explanation is written down and specific.
 

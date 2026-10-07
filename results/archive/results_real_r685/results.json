@@ -1,0 +1,108 @@
+{
+  "plant": {
+    "Jm": 8e-05,
+    "Jl": 0.0012,
+    "ks": 1.0,
+    "knl": 0.0,
+    "Kt": 0.2,
+    "resonance_Hz": 18.37762984739307
+  },
+  "identified": {
+    "ks": 0.9866677190045663,
+    "knl": 0.0,
+    "rel_errors": {
+      "Jm": 0.3213181545193722,
+      "bm": 6.530406540948291,
+      "Jl": 0.01311912019675029,
+      "bl": 0.787052759439055,
+      "ks": 0.01333228099543371,
+      "knl": 0.0
+    }
+  },
+  "learned_disturbance": {
+    "heldout_r2": 0.9830965992090384,
+    "beta": [
+      -0.15035079447101024,
+      0.0005274711635080698,
+      -0.17063471507727912,
+      -0.11982831815883704,
+      0.2009957400192355,
+      -0.024515743161616133,
+      -0.04754005226425776,
+      0.20452562375603317,
+      -0.007267152273002925,
+      0.1503183881529811,
+      0.020739329402060296,
+      -0.018396768341399534,
+      -0.004233132014587589
+    ]
+  },
+  "tracking": {
+    "smooth": {
+      "PID": {
+        "rms_error_mNm": 20.501251418736626,
+        "max_error_mNm": 50.42778119568536,
+        "rms_error_overall_mNm": 23.382917731064794
+      },
+      "MPC": {
+        "rms_error_mNm": 3.4296892808537067,
+        "max_error_mNm": 10.182534937609455,
+        "rms_error_overall_mNm": 9.104242796003248
+      },
+      "MPC+FF-ID": {
+        "rms_error_mNm": 3.3061042016262587,
+        "max_error_mNm": 9.944621886304128,
+        "rms_error_overall_mNm": 9.115041562196847
+      },
+      "MPC+learned": {
+        "rms_error_mNm": 3.4345851440761863,
+        "max_error_mNm": 10.323004217549114,
+        "rms_error_overall_mNm": 9.0486404206186
+      }
+    },
+    "edges": {
+      "PID": {
+        "rms_error_mNm": 26.62190028231576,
+        "max_error_mNm": 122.18249573597109,
+        "rms_error_overall_mNm": 28.67588298642036
+      },
+      "MPC": {
+        "rms_error_mNm": 9.57032041949784,
+        "max_error_mNm": 102.50661451123172,
+        "rms_error_overall_mNm": 42.33445032995307
+      },
+      "MPC+learned": {
+        "rms_error_mNm": 9.012338670858314,
+        "max_error_mNm": 102.12823217998674,
+        "rms_error_overall_mNm": 13.690099296849512
+      }
+    }
+  },
+  "disturbance": {
+    "PID": {
+      "peak_error_mNm": 30.71693899041478,
+      "steady_error_mNm": 7.234151436252274
+    },
+    "MPC": {
+      "peak_error_mNm": 3.0084136296275044,
+      "steady_error_mNm": 0.3030547643146944
+    },
+    "MPC+learned": {
+      "peak_error_mNm": 3.3169242022438317,
+      "steady_error_mNm": 1.6723380040360165
+    }
+  },
+  "collision": {
+    "detected": true,
+    "grab_time_s": 0.1,
+    "detection_latency_ms": 99.0,
+    "post_collision_peak_torque_mNm": 222.44531692682094
+  },
+  "mpc": {
+    "solver": "admm",
+    "qp_iterations": 20,
+    "horizon_steps": 20,
+    "period_ms": 0.5
+  },
+  "wall_seconds": 264.02468276023865
+}

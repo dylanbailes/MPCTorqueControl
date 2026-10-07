@@ -3,7 +3,7 @@
 
 #include "mpc_model.h"   /* MPC_N, MPC_L, MPC_RHO */
 
-#define MPC_N_MAX 32
+#define MPC_N_MAX MPC_N
 
 typedef struct {
     const float *L;       /* Cholesky factor of H + rho I, N x N lower   */

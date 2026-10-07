@@ -1,18 +1,20 @@
 function results = mpc_design()
 %MPC_DESIGN  Condensed MPC for SEA torque tracking (blocked output).
 %   Mirrors model/mpc.py: same linear model, same cost, same QP solved with
-%   quadprog (Optimization Toolbox).  Use this to explore weights and
-%   horizons in MATLAB before flashing the firmware.
+%   a warm-started ADMM solver (inline below — no toolboxes, mirrors the
+%   firmware).  Use this to explore weights and horizons in MATLAB before
+%   flashing the firmware.
 
 p = struct('Jm', 8e-5, 'bm', 3e-5, 'Jl', 1.2e-3, 'bl', 1e-4, ...
            'ks', 1.0, 'Kt', 0.1);
 
-% blocked-output fixture: stiff spring from load to ground
-k_block = 1e4;
+% blocked-output fixture: stiff spring-damper from load to ground
+% (the damper is part of the plant and must be in the prediction model)
+k_block = 1e4; d_block = 50.0;
 A = [0 1 0 0;
      -p.ks/p.Jm -p.bm/p.Jm  p.ks/p.Jm 0;
      0 0 0 1;
-     p.ks/p.Jl 0 -(p.ks+k_block)/p.Jl -p.bl/p.Jl];
+     p.ks/p.Jl 0 -(p.ks+k_block)/p.Jl -(p.bl+d_block)/p.Jl];
 B = [0; p.Kt/p.Jm; 0; 0];
 C = [p.ks 0 -p.ks 0];
 
@@ -21,7 +23,7 @@ N  = 20;          % horizon
 Qy = 3e4;
 Ru = 5e-3;
 Sr = 0.3;
-u_max  = 6.0;
+u_max  = 4.0;   % matched to the torque envelope (reference peaks ~3.8 A)
 du_max = 1.5;
 
 % exact ZOH discretization
@@ -88,7 +90,9 @@ function U = admm_qp(H, g, lo, hi)
         u = L' \ (L \ rhs);   % solve (L*L') u = rhs — order matters!
         z_new = min(max(u + lam, lo), hi);
         lam = lam + u - z_new;
-        if it > 1 && max(abs(z_new - z)) < 1e-8, z = z_new; break; end
+        primal = max(abs(u - z_new));
+        dual = rho * max(abs(z_new - z));
+        if it > 1 && primal < 1e-8 && dual < 1e-8, z = z_new; break; end
         z = z_new;
     end
     U = z;

@@ -30,17 +30,16 @@ def test_residual_fit_recovers_structure():
     assert abs(model.beta[1] - 0.008) < 0.002
 
 
-def test_residual_export_to_c():
+def test_residual_export_to_c(tmp_path):
     theta_m, omega_m, u, d = _synthetic_disturbance(n=500)
     model = LearnedDisturbance(ResidualConfig())
     model.fit(theta_m, omega_m, u, d)
-    path = "results/test_learned_model.h"
+    path = tmp_path / "learned_model.h"
     model.export_to_c(path)
     assert os.path.exists(path)
-    text = open(path).read()
+    text = path.read_text(encoding="utf-8")
     assert "learned_disturbance" in text
     assert "learned_friction" in text
-    os.remove(path)
 
 
 def test_learned_feedforward_improves_mpc_tracking():

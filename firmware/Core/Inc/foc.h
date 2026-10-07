@@ -15,6 +15,8 @@ typedef struct {
     float iq_int;             /* integrator state          */
     float vd, vq;             /* applied voltages          */
     float theta_e;            /* electrical angle          */
+    int pole_pairs;            /* configure from measured motor */
+    float electrical_offset;   /* calibrated alignment [rad] */
     float duty[3];            /* duty cycles 0..1          */
 } FocCtl;
 
@@ -22,7 +24,7 @@ void foc_init(FocCtl *f, float R, float L, float Ke, float v_max,
               float loop_hz);
 void foc_set_torque(FocCtl *f, float iq_ref);   /* torque loop -> current cmd */
 float foc_current_loop(FocCtl *f, float ia, float ib, float theta_m,
-                       float dt);               /* returns applied vq (debug) */
+                       float omega_m, float dt); /* returns applied vq */
 float foc_align(FocCtl *f, float duty_a, float duty_b, float duty_c,
                 float theta_m);
 

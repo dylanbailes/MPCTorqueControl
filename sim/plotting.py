@@ -23,7 +23,7 @@ def _save(fig, name: str) -> str:
 
 def plot_id(id_params, data, calib, true: "PlantParams") -> str:
     """Spring calibration curve + excitation + identified friction."""
-    fig, axes = plt.subplots(3, 1, figsize=(9, 9))
+    fig, axes = plt.subplots(4, 1, figsize=(9, 11))
     # 1) spring calibration: tau_ext vs delta_theta with cubic fit
     d, te = calib["delta_theta"], calib["tau_ext"]
     axes[0].plot(d, te, ".", ms=2, alpha=0.4, label="measurements")
@@ -43,7 +43,7 @@ def plot_id(id_params, data, calib, true: "PlantParams") -> str:
     axes[1].legend(loc="upper right")
     # 3) identified friction curves
     w = np.linspace(-6, 6, 400)
-    from learn.system_id import stribeck
+    from learn.system_id import stribeck, _tf_estimate
     tc, tst, wst, bv = id_params.fric_m
     axes[2].plot(w, stribeck(w, tc, tst, wst, bv), lw=1.6,
                  label="identified motor friction")
@@ -52,6 +52,23 @@ def plot_id(id_params, data, calib, true: "PlantParams") -> str:
     axes[2].set_xlabel(r"$\omega_m$ [rad/s]")
     axes[2].set_ylabel(r"friction [N.m]")
     axes[2].legend()
+    # 4) frequency-domain cross-check: |H(f)| from i_q to omega_m, with the
+    #    detected resonance peak -> Jm inverted independently of the fit
+    f, H = _tf_estimate(data["iq"], data["omega_m"], fs=1.0 / (t[1] - t[0]),
+                        nperseg=5000)
+    axes[3].plot(f, H, lw=1.2, color="steelblue")
+    if id_params.f_res_hz is not None:
+        axes[3].axvline(id_params.f_res_hz, color="r", ls=":", lw=1.4)
+        label = (f"peak {id_params.f_res_hz:.2f} Hz -> "
+                 f"$J_m$={id_params.Jm_freq:.2e}"
+                 if id_params.Jm_freq is not None else
+                 f"peak {id_params.f_res_hz:.2f} Hz")
+        axes[3].text(0.97, 0.92, label, transform=axes[3].transAxes,
+                     ha="right", va="top", fontsize=9)
+    axes[3].set_xlim(0, 60)
+    axes[3].set_xlabel(r"f [Hz]")
+    axes[3].set_ylabel(r"$|H(f)|$ [$\omega_m$/A]")
+    axes[3].set_title("resonance sweep (frequency-domain Jm cross-check)")
     return _save(fig, "system_id.png")
 
 
@@ -91,7 +108,8 @@ def plot_disturbance_fit(fit_meta: dict, eval_r2: float, rec: dict,
     axes[1].set_xlabel("t [s]")
     axes[1].set_title(f"held-out R² = {eval_r2:.4f}")
     axes[1].legend()
-    names = ["bias", "tanh(w)", "w", "sin6t", "cos6t", "sin12t", "cos12t", "u", "u sin6t"]
+    from learn.residual import feature_names
+    names = feature_names(getattr(learned.cfg, "lag", 0))
     axes[2].barh(names, learned.beta, color="steelblue")
     axes[2].set_title("learned coefficients")
     axes[2].set_xlabel(r"$\beta$")
@@ -103,8 +121,12 @@ def plot_disturbance(runs: dict, name: str = "disturbance_rejection.png") -> str
     for label, rec in runs.items():
         axes[0].plot(rec["t"], rec["tau_s_est"], lw=1.2, label=label)
         axes[1].plot(rec["t"], rec["tau_s_est"] - rec["tau_ref"], lw=1.0, label=label)
-    axes[0].plot(runs["PID"]["t"], runs["PID"]["tau_ext"], "k:", lw=1.2,
-                 label="external torque")
+    rec = runs["PID"]
+    motor_disturbance = "tau_dm" in rec and np.any(rec["tau_dm"])
+    disturbance = rec["tau_dm"] if motor_disturbance else rec["tau_ext"]
+    axes[0].plot(rec["t"], disturbance, "k:", lw=1.2,
+                 label="motor disturbance" if motor_disturbance else "load disturbance")
+    axes[0].plot(rec["t"], rec["tau_ref"], "k--", lw=1.0, label="reference")
     axes[0].set_ylabel(r"$\tau$ [N.m]")
     axes[0].legend()
     axes[1].set_ylabel("error [N.m]")
@@ -113,11 +135,16 @@ def plot_disturbance(runs: dict, name: str = "disturbance_rejection.png") -> str
     return _save(fig, name)
 
 
-def plot_collision(rec: dict, name: str = "collision_demo.png") -> str:
+def plot_collision(rec: dict, name: str = "collision_demo.png",
+                   grab_time: float | None = None) -> str:
     fig, axes = plt.subplots(4, 1, figsize=(10, 10), sharex=True)
     t = rec["t"]
     axes[0].plot(t, rec["theta_l"], lw=1.2, label=r"$\theta_l$")
-    axes[0].axhline(0.2, color="r", ls=":", lw=1, label="wall")
+    if grab_time is not None:
+        for ax in axes:
+            ax.axvline(grab_time, color="r", ls=":", lw=1)
+        contact_angle = rec["theta_l"][np.argmin(np.abs(t - grab_time))]
+        axes[0].axhline(contact_angle, color="r", ls="--", lw=1, label="grip angle")
     axes[0].set_ylabel(r"$\theta_l$ [rad]")
     axes[0].legend()
     axes[1].plot(t, rec["tau_ref"], "k--", lw=1, label="ref")

@@ -101,7 +101,9 @@ class AdmmQP:
             z_new = np.clip(u + lam, lo, hi)
             lam = lam + u - z_new
             # residual-based early exit
-            if it > 0 and np.max(np.abs(z_new - z)) < self.tol:
+            primal = np.max(np.abs(u - z_new))
+            dual = rho * np.max(np.abs(z_new - z))
+            if it > 0 and primal < self.tol and dual < self.tol:
                 z = z_new
                 break
             z = z_new

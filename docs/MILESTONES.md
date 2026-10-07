@@ -1,19 +1,21 @@
 # Milestones — from repo to bench
 
-The simulation side of every milestone is already done and verified
-(`results/`, `test/`). These are the hardware bring-up steps, roughly one
-weekend each. Do them in order; each leaves you with something demonstrable.
+These are planned hardware bring-up steps. Simulation evidence is in
+[RESULTS.md](RESULTS.md); current implementation limits are in
+[STATUS.md](STATUS.md). Older numerical targets below reflect the GM5208
+design and must be reconciled with measured 4015 parameters before use.
 
 ## M0 — Power stack bring-up (weekend 1)
 
-- [ ] Flash `firmware/` to the B-G431B-ESC1 (CubeMX project per
-      `firmware/README.md`).
+- [ ] Complete and build the CubeMX board integration described in
+      [the firmware guide](../firmware/README.md), then flash the board.
 - [ ] Verify ADC current sensing: spin the motor with a hand, see sinusoidal
       phase currents in the USB telemetry.
 - [ ] Encoder alignment: `foc_align()` — find the electrical-angle offset
       per phase; verify FOC holds a commanded dq current (scope: phase
       currents sinusoidal at 60°/120°/240° commutation steps).
-- **Exit criteria:** current loop holds iq_ref within a few % at 5 A peak.
+- **Exit criteria:** current loop holds iq_ref within a few % at **±2 A** peak
+  (bus-limited: 24 V / 13.7 Ω ≈ 1.75 A stall with the GM5208-24).
 
 ## M1 — Digital twin vs. hardware (validation)
 
@@ -42,7 +44,7 @@ weekend each. Do them in order; each leaves you with something demonstrable.
 - [ ] PID torque loop first (baseline), then switch the MPC in via a config
       flag. Measure RMS tracking error on the smooth reference waveform.
 - **Exit criteria:** MPC beats PID on the bench like it does in sim
-      (sim: 5.7 vs 32.9 mN·m RMS). If not, re-check ID and loop timing.
+      (sim: 4.0 vs 32.9 mN·m RMS). If not, re-check ID and loop timing.
 
 ## M4 — Learned disturbance feedforward
 
@@ -52,8 +54,8 @@ weekend each. Do them in order; each leaves you with something demonstrable.
 - [ ] Enable `learned_feedforward()` in `tasks.c`; re-measure the smooth /
       edge-rich tracking and the disturbance-step tests.
 - **Exit criteria:** measurable improvement on at least one metric
-      (disturbance steady-state error and edge tracking in sim: 1.08→0.91
-      and 28→24 mN·m).
+      (disturbance steady-state error and edge overall in sim:
+      1.06→0.81 and 14.8→13.9 mN·m).
 
 ## M5 — Impedance + collision safety demo
 

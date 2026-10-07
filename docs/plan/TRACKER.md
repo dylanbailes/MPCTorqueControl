@@ -16,10 +16,13 @@ week's doc or `docs/KNOWN_ISSUES.md`)
 ### Week 1 — Launch & toolchain
 - [ ] `pip install -r requirements.txt` clean on a fresh venv
 - [ ] `python -m sim.run_experiments` regenerates `results/results.json`
-      (MPC ≈ 5.7 vs PID ≈ 32.9 mN·m on smooth tracking)
-- [ ] `pytest test/ -q` → 33 passed
+      (MPC ≈ 4.0 vs PID ≈ 32.9 mN·m on smooth tracking)
+- [ ] `pytest test/ -q` → all tests passed
 - [ ] Can explain the three loops and point at the implementing files
-- [ ] Hardware ordered from `hardware/BOM.md`
+- [ ] Order A placed per `docs/plan/ordering_checklist.md` (ESC1, motor,
+      sensors, structure)
+- [ ] Every Order A arrival checked against the DOA list and logged here
+      (magnet present, shaft/dowel/slot sizes measured, spin tests passed)
 
 ### Week 2 — CubeMX + telemetry
 - [ ] CubeMX project: 170 MHz, TIM1 3×PWM @ 100 kHz + dead time, TIM2 10 kHz,
@@ -29,7 +32,7 @@ week's doc or `docs/KNOWN_ISSUES.md`)
 - [ ] Can explain clock tree + timer→PWM→ADC trigger chain from memory
 
 ### Week 3 — Encoders & velocity
-- [ ] Both AS5048A read at ≥ 2 kHz over SPI
+- [ ] MT6701 motor A/B decoded by timer at ≥ 2 kHz; Z index verified; load-side AS5048A read at ≥ 2 kHz over SPI; MT6701 I²C diagnostic angle agrees with ABZ count
 - [ ] Stationary noise: |Δ(θ_q)| ≤ 2 LSB for 99.9% of frames (60 s)
 - [ ] Velocity pipeline (filtered difference) smooth enough for control
 - [ ] Dashboard: live θm, θl, Δθ, ωm, ωl (+ offline replay)
@@ -37,13 +40,13 @@ week's doc or `docs/KNOWN_ISSUES.md`)
 ## Phase 1 — Motor + build (Weeks 4–5)
 
 ### Week 4 — FOC current loop (M0)
-- [ ] Motor spins under FOC; iq held < 5% error up to ±5 A at 10 kHz
+- [ ] Motor spins under FOC; iq held < 5% error up to ±2 A at 10 kHz (bus-limited stall ≈ 1.75 A)
 - [ ] i_d ≈ 0 while i_q tracks
 - [ ] Correct commutation both directions (no stall/runaway)
 - [ ] Alignment procedure documented + repeatable
 
 ### Week 5 — Mechanical build (M1)
-- [ ] Rig assembled: motor → torsion bar → load disc, encoders mounted
+- [ ] Rig assembled: motor → torsion bar → load disc; MT6701 motor encoder and AS5048A load encoder mounted
 - [ ] Free-spin test clean (Δθ smooth, < 0.05 rad, no stick-slip)
 - [ ] Resonance measured ≈ 18 Hz ± 30%; ζ recorded
 - [ ] Spring coupling disassembles/reassembles in < 10 min

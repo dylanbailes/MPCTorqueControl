@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1152pt" height="648pt" viewBox="0 0 1152 648" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 648
+L 1152 648
+L 1152 0
+L 0 0
+z
+" style="fill: #f7f8fa"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 200.16 307.6704
+C 209.795147 307.6704 219.03696 303.974318 225.850038 297.396175
+C 232.663116 290.818031 236.4912 281.8949 236.4912 272.592
+C 236.4912 263.2891 232.663116 254.365969 225.850038 247.787825
+C 219.03696 241.209682 209.795147 237.5136 200.16 237.5136
+C 190.524853 237.5136 181.28304 241.209682 174.469962 247.787825
+C 167.656884 254.365969 163.8288 263.2891 163.8288 272.592
+C 163.8288 281.8949 167.656884 290.818031 174.469962 297.396175
+C 181.28304 303.974318 190.524853 307.6704 200.16 307.6704
+z
+" clip-path="url(#pc6df86e46c)" style="fill: #ffffff; stroke: #2868b2; stroke-width: 2.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 763.92 307.6704
+C 773.555147 307.6704 782.79696 303.974318 789.610038 297.396175
+C 796.423116 290.818031 800.2512 281.8949 800.2512 272.592
+C 800.2512 263.2891 796.423116 254.365969 789.610038 247.787825
+C 782.79696 241.209682 773.555147 237.5136 763.92 237.5136
+C 754.284853 237.5136 745.04304 241.209682 738.229962 247.787825
+C 731.416884 254.365969 727.5888 263.2891 727.5888 272.592
+C 727.5888 281.8949 731.416884 290.818031 738.229962 297.396175
+C 745.04304 303.974318 754.284853 307.6704 763.92 307.6704
+z
+" clip-path="url(#pc6df86e46c)" style="fill: #ffffff; stroke: #2868b2; stroke-width: 2.5; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 236.4912 272.592
+L 350.496 272.592
+" clip-path="url(#pc6df86e46c)" style="fill: none; stroke: #182531; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 350.496 272.592
+L 366.939 254.448
+L 383.382 290.736
+L 399.825 254.448
+L 416.268 290.736
+L 432.711 254.448
+L 449.154 290.736
+L 465.597 254.448
+L 482.04 290.736
+L 498.483 254.448
+L 514.926 290.736
+L 531.369 254.448
+L 547.812 290.736
+L 564.255 254.448
+L 580.698 290.736
+L 597.141 254.448
+L 613.584 272.592
+" clip-path="url(#pc6df86e46c)" style="fill: none; stroke: #138578; stroke-width: 2.5; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 613.584 272.592
+L 727.5888 272.592
+" clip-path="url(#pc6df86e46c)" style="fill: none; stroke: #182531; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="text_1">
+    <text style="font-size: 22px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #182531" x="200.16" y="278.306844" transform="rotate(-0 200.16 278.306844)">M</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #586975" x="200.16" y="339.12" transform="rotate(-0 200.16 339.12)">Motor inertia</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 22px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #182531" x="763.92" y="278.306844" transform="rotate(-0 763.92 278.306844)">L</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #586975" x="763.92" y="339.12" transform="rotate(-0 763.92 339.12)">Load inertia</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #182531" x="482.04" y="221.184" transform="rotate(-0 482.04 221.184)">Torsion spring</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #586975" x="482.04" y="343.9584" transform="rotate(-0 482.04 343.9584)">Torque estimated from differential deflection</text>
+   </g>
+   <g id="patch_4">
+    <path d="M 919.576703 272.592
+Q 865.623814 272.592 809.770267 272.592
+" style="fill: none; stroke: #182531; stroke-width: 1.7; stroke-linecap: round"/>
+    <path d="M 914.376703 269.992
+L 919.576703 272.592
+L 914.376703 275.192
+" style="fill: none; stroke: #182531; stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #182531" x="970.632" y="275.968953" transform="rotate(-0 970.632 275.968953)">Torque output</text>
+   </g>
+  </g>
+  <g id="patch_5">
+   <path d="M 79.488 562.464
+L 308.736 562.464
+Q 322.56 562.464 322.56 554.688
+L 322.56 394.632
+Q 322.56 386.856 308.736 386.856
+L 79.488 386.856
+Q 65.664 386.856 65.664 394.632
+L 65.664 554.688
+Q 65.664 562.464 79.488 562.464
+z
+" style="fill: #ffffff; stroke: #dde3e8; stroke-linejoin: miter"/>
+  </g>
+  <g id="patch_6">
+   <path d="M 338.688 562.464
+L 567.936 562.464
+Q 581.76 562.464 581.76 554.688
+L 581.76 394.632
+Q 581.76 386.856 567.936 386.856
+L 338.688 386.856
+Q 324.864 386.856 324.864 394.632
+L 324.864 554.688
+Q 324.864 562.464 338.688 562.464
+z
+" style="fill: #ffffff; stroke: #dde3e8; stroke-linejoin: miter"/>
+  </g>
+  <g id="patch_7">
+   <path d="M 597.888 562.464
+L 827.136 562.464
+Q 840.96 562.464 840.96 554.688
+L 840.96 394.632
+Q 840.96 386.856 827.136 386.856
+L 597.888 386.856
+Q 584.064 386.856 584.064 394.632
+L 584.064 554.688
+Q 584.064 562.464 597.888 562.464
+z
+" style="fill: #ffffff; stroke: #dde3e8; stroke-linejoin: miter"/>
+  </g>
+  <g id="patch_8">
+   <path d="M 857.088 562.464
+L 1086.336 562.464
+Q 1100.16 562.464 1100.16 554.688
+L 1100.16 394.632
+Q 1100.16 386.856 1086.336 386.856
+L 857.088 386.856
+Q 843.264 386.856 843.264 394.632
+L 843.264 554.688
+Q 843.264 562.464 857.088 562.464
+z
+" style="fill: #ffffff; stroke: #dde3e8; stroke-linejoin: miter"/>
+  </g>
+  <g id="text_8">
+   <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586975" x="74.88" y="54.477188" transform="rotate(-0 74.88 54.477188)">SEA–MPC  /  PROJECT EVIDENCE</text>
+  </g>
+  <g id="text_9">
+   <text style="font-weight: 700; font-size: 30px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #182531" x="74.88" y="113.515313" transform="rotate(-0 74.88 113.515313)">From actuator mechanics to measured control</text>
+  </g>
+  <g id="text_10">
+   <text style="font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586975" x="74.88" y="153.197812" transform="rotate(-0 74.88 153.197812)">Implemented simulation and host checks · STM32 integration and physical validation remain ahead</text>
+  </g>
+  <g id="text_11">
+   <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586975" x="89.856" y="417.96" transform="rotate(-0 89.856 417.96)">01</text>
+  </g>
+  <g id="text_12">
+   <text style="font-weight: 700; font-size: 17px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #182531" x="89.856" y="447.12" transform="rotate(-0 89.856 447.12)">Simulation</text>
+  </g>
+  <g id="text_13">
+   <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #138578" x="89.856" y="475.632" transform="rotate(-0 89.856 475.632)">Implemented</text>
+  </g>
+  <g id="text_14">
+   <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #586975" transform="translate(89.856 525.081563)">ID, PID/MPC, residual FF,</text>
+   <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #586975" transform="translate(89.856 543.13125)">disturbance and grip tests</text>
+  </g>
+  <g id="text_15">
+   <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586975" x="349.056" y="417.96" transform="rotate(-0 349.056 417.96)">02</text>
+  </g>
+  <g id="text_16">
+   <text style="font-weight: 700; font-size: 17px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #182531" x="349.056" y="447.12" transform="rotate(-0 349.056 447.12)">Portable C</text>
+  </g>
+  <g id="text_17">
+   <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #138578" x="349.056" y="475.632" transform="rotate(-0 349.056 475.632)">Host checked</text>
+  </g>
+  <g id="text_18">
+   <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #586975" transform="translate(349.056 524.53125)">Modules compile; MPC</text>
+   <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #586975" transform="translate(349.056 543.13125)">compared against Python</text>
+  </g>
+  <g id="text_19">
+   <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586975" x="608.256" y="417.96" transform="rotate(-0 608.256 417.96)">03</text>
+  </g>
+  <g id="text_20">
+   <text style="font-weight: 700; font-size: 17px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #182531" x="608.256" y="447.12" transform="rotate(-0 608.256 447.12)">STM32 integration</text>
+  </g>
+  <g id="text_21">
+   <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586975" x="608.256" y="475.632" transform="rotate(-0 608.256 475.632)">In progress</text>
+  </g>
+  <g id="text_22">
+   <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #586975" transform="translate(608.256 524.53125)">Board support, sensing,</text>
+   <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #586975" transform="translate(608.256 543.13125)">alignment and loop timing</text>
+  </g>
+  <g id="text_23">
+   <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586975" x="867.456" y="417.96" transform="rotate(-0 867.456 417.96)">04</text>
+  </g>
+  <g id="text_24">
+   <text style="font-weight: 700; font-size: 17px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #182531" x="867.456" y="447.12" transform="rotate(-0 867.456 447.12)">Physical validation</text>
+  </g>
+  <g id="text_25">
+   <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586975" x="867.456" y="475.632" transform="rotate(-0 867.456 475.632)">Pending</text>
+  </g>
+  <g id="text_26">
+   <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #586975" transform="translate(867.456 525.081563)">Calibrated bench results,</text>
+   <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #586975" transform="translate(867.456 543.13125)">repeatability and demo</text>
+  </g>
+  <g id="text_27">
+   <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586975" x="74.88" y="602.64" transform="rotate(-0 74.88 602.64)">Architecture schematic, not a completed hardware assembly.  Status: October 7, 2026</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pc6df86e46c">
+   <rect x="74.88" y="187.92" width="1002.24" height="181.44"/>
+  </clipPath>
+ </defs>
+</svg>

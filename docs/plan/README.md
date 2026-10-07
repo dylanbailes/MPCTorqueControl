@@ -1,5 +1,11 @@
 # Semester Plan — Building the SEA-MPC Project
 
+**Planning reference:** unchecked criteria describe future work. This plan
+retains earlier GM5208/nominal targets alongside the selected 4015 design.
+Use [current status](../STATUS.md), [current simulation results](../RESULTS.md),
+and [firmware integration gaps](../../firmware/README.md) before interpreting
+older numbers or claiming hardware completion.
+
 This is the week-by-week build plan for bringing the repo (`model/`,
 `learn/`, `sim/`, `firmware/`, `hardware/`) to life on the bench. Each week
 is its own document (`docs/plan/weekNN.md`) with:
@@ -32,7 +38,7 @@ phase tells you what to drop without breaking the story.
 |----|-------|------------------|--------------|
 | 1 | Launch & toolchain | sim re-run, repo tour, environment | SEA + PMSM/dq model, why MPC |
 | 2 | CubeMX project + USB telemetry | blinking firmware streaming telemetry | STM32 clocks, TIM1 PWM, ADC, USB CDC |
-| 3 | Encoders & velocity | both AS5048A at 2 kHz, velocities | SPI, quantization, Savitzky–Golay |
+| 3 | Encoders & velocity | MT6701 motor ABZ + AS5048A load at 2 kHz, velocities | timer quadrature, SPI, I²C diagnostics, quantization |
 | 4 | FOC current loop | current loop closed at 10 kHz | two-shunt sensing, SVPWM, dq PI tuning |
 | 5 | Mechanical build | rig assembled, resonance measured | torsion-bar mechanics, blocked-output rig |
 | 6 | Spring calibration | ks to ±2% from weights | least squares, model selection, observability |
@@ -60,6 +66,12 @@ phase tells you what to drop without breaking the story.
   compared against the digital twin (`model/plant.py`, `results/`). If the
   bench and the twin disagree by >10% on a controlled experiment, stop and
   find out why — that investigation *is* the project's value.
+
+## Companion documents
+
+- [`fusion_cad_plan.md`](fusion_cad_plan.md) — the complete Fusion 360 CAD
+  plan (parametric parts, assemblies, imports, folder layout), built and
+  maintained through the Fusion MCP. Local staging area: `hardware/cad/`.
 
 ## The one-line version of the whole semester
 

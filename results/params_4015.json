@@ -1,0 +1,151 @@
+{
+  "motor": "QiuLovesYT 4015 BLDC + MT6701 encoder (hybrid build)",
+  "as_built": {
+    "R": 4.8,
+    "L": 0.0026,
+    "Kt": 0.1562,
+    "Ke": 0.1562,
+    "Jm": 3e-05,
+    "Jl": 0.0012,
+    "ks": 1.0,
+    "Vbus": 24.0,
+    "resonance_Hz": 29.418561775602978,
+    "rated_torque_Nm": 0.3,
+    "max_current_A": 4.0
+  },"chosen_mpc": {"N": 30, "u_max": 3.0,
+    "Q_y": 30000.0,
+    "R_u": 0.005,
+    "S_rate": 0.3,
+    "du_max": 1.5,
+    "T_s": 0.0005
+  },
+  "sweep_results": [
+    {
+      "N": 30,
+      "u_max": 2.5,
+      "smooth": {
+        "rms_mNm": 2.361301896816021,
+        "max_mNm": 5.4412928277071115,
+        "overall_rms_mNm": 8.04624600852257
+      },
+      "edges": {
+        "rms_mNm": 6.131723824782304,
+        "max_mNm": 100.96698009972486,
+        "overall_rms_mNm": 11.691361881517278
+      }
+    },
+    {
+      "N": 30,
+      "u_max": 3.0,
+      "smooth": {
+        "rms_mNm": 2.361301896816021,
+        "max_mNm": 5.4412928277071115,
+        "overall_rms_mNm": 8.166371380875578
+      },
+      "edges": {
+        "rms_mNm": 6.102575216269434,
+        "max_mNm": 100.96698009972486,
+        "overall_rms_mNm": 11.494047379758142
+      }
+    },
+    {
+      "N": 30,
+      "u_max": 4.0,
+      "smooth": {
+        "rms_mNm": 2.361301896816021,
+        "max_mNm": 5.4412928277071115,
+        "overall_rms_mNm": 8.430386029795635
+      },
+      "edges": {
+        "rms_mNm": 7.249192864714572,
+        "max_mNm": 100.96698009972486,
+        "overall_rms_mNm": 12.281414590498741
+      }
+    },
+    {
+      "N": 40,
+      "u_max": 2.5,
+      "smooth": {
+        "rms_mNm": 2.361301896816021,
+        "max_mNm": 5.4412928277071115,
+        "overall_rms_mNm": 8.04624600852257
+      },
+      "edges": {
+        "rms_mNm": 6.131745640748915,
+        "max_mNm": 100.96698009972486,
+        "overall_rms_mNm": 11.688471730203043
+      }
+    },
+    {
+      "N": 40,
+      "u_max": 3.0,
+      "smooth": {
+        "rms_mNm": 2.361301896816021,
+        "max_mNm": 5.4412928277071115,
+        "overall_rms_mNm": 8.166371380875578
+      },
+      "edges": {
+        "rms_mNm": 6.102575364652696,
+        "max_mNm": 100.96698009972486,
+        "overall_rms_mNm": 11.49404725257686
+      }
+    },
+    {
+      "N": 40,
+      "u_max": 4.0,
+      "smooth": {
+        "rms_mNm": 2.361301896816021,
+        "max_mNm": 5.4412928277071115,
+        "overall_rms_mNm": 8.430386029795635
+      },
+      "edges": {
+        "rms_mNm": 7.24913624192535,
+        "max_mNm": 100.96698009972486,
+        "overall_rms_mNm": 12.28139772365603
+      }
+    },
+    {
+      "N": 20,
+      "u_max": 2.5,
+      "smooth": {
+        "rms_mNm": 2.3614079085081805,
+        "max_mNm": 5.4412928277071115,
+        "overall_rms_mNm": 8.046255190844466
+      },
+      "edges": {
+        "rms_mNm": 6.131745524725459,
+        "max_mNm": 100.96698009972486,
+        "overall_rms_mNm": 11.687367109390786
+      }
+    },
+    {
+      "N": 20,
+      "u_max": 3.0,
+      "smooth": {
+        "rms_mNm": 2.3614079085081805,
+        "max_mNm": 5.4412928277071115,
+        "overall_rms_mNm": 8.166403477439317
+      },
+      "edges": {
+        "rms_mNm": 6.102673493579202,
+        "max_mNm": 100.96698009972486,
+        "overall_rms_mNm": 11.493792505576184
+      }
+    },
+    {
+      "N": 20,
+      "u_max": 4.0,
+      "smooth": {
+        "rms_mNm": 2.3614079085081805,
+        "max_mNm": 5.4412928277071115,
+        "overall_rms_mNm": 8.43038285020165
+      },
+      "edges": {
+        "rms_mNm": 7.249231845731704,
+        "max_mNm": 100.96698009972486,
+        "overall_rms_mNm": 12.28134650203136
+      }
+    }
+  ],
+  "rationale": "N covers ~30-45% of the ~33 ms resonance cycle (vs 18% at N=20 for the old 18 Hz plant); u_max stays at or above the 2.25 A the 0.35 N\u00b7m envelope needs, and below the 4 A hardware limit so authority is matched, not over-authoritative."
+}

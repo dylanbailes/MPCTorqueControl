@@ -15,7 +15,7 @@ Two build options are sized and stress-checked:
 Run:  python hardware/spring_design.py
 """
 
-from math import pi
+from math import pi, sqrt
 
 # ---- material properties ---------------------------------------------------
 E_STEEL = 196.5e9   # Young's modulus, spring steel      [Pa]
@@ -103,7 +103,46 @@ for m, R_mm in ((0.25, 98.0), (0.30, 89.0), (0.20, 110.0)):
     J = 0.5 * m * (R_mm * 1e-3) ** 2
     print(f"  m = {m:.2f} kg, R = {R_mm:.0f} mm -> J = {J:.4e} kg.m^2")
 
+# ---------------------------------------------------------------------------
+# Variable load inertia — washer-count tuning. The disc was built for this:
+# 28 bolt holes at the radius-of-gyration circle r = 68.44 mm, so J changes
+# LINEARLY with washer count and every washer adds the same dJ.
+#   Jl(n) = J_base + n * dJ_w,   dJ_w = m_w * (r^2 + (Ro^2 + Ri^2)/2)
+# Weigh your actual disc and washers, update the constants, re-run.
+# ---------------------------------------------------------------------------
 print()
-print("  Encoders: AS5048A (14-bit) on both motor and load shafts — the")
+print("-" * 68)
+print("Variable load inertia — washer-count table (Jl = J_base + n*dJ_w)")
+print("-" * 68)
+
+m_disc = 0.0562   # printed Ø196 × 1.8 mm disc alone [kg] — verify on scale
+R_disc = 0.098    # disc outer radius [m]
+m_w = 0.0069      # one M12 fender washer [kg] — verify on scale
+r_w = 0.06844     # washer bolt-circle radius [m] (radius of gyration)
+Ro_w, Ri_w = 0.014, 0.00625   # washer outer/inner radius [m]
+Jm_motor = 3.0e-5 # motor inertia (hybrid 4015 build) [kg.m^2]
+
+J_base = 0.5 * m_disc * R_disc**2 + 1.0e-5    # + hub/bolts/plug allowance
+dJ_w = m_w * (r_w**2 + (Ro_w**2 + Ri_w**2) / 2.0)
+
+print(f"  J_base (disc+hub, 0 washers) = {J_base:.3e} kg.m^2")
+print(f"  dJ_w per washer at r={r_w*1e3:.1f} mm  = {dJ_w:.3e} kg.m^2")
+print()
+print("  target Jl   washers  stacking       Jl achieved   f_res  f_antires")
+for Jt in (J_base, 6.0e-4, 9.0e-4, 1.2e-3, 1.8e-3, 2.4e-3):
+    n = max(0, round((Jt - J_base) / dJ_w))
+    J = J_base + n * dJ_w
+    if n <= 28:
+        stack = f"{n} x1"
+    elif n <= 56:
+        stack = f"{n - 28} x2 + {56 - n} x1"
+    else:
+        stack = f"{n - 56} x3 + {84 - n} x2"
+    f_res = sqrt(ks * (1.0 / Jm_motor + 1.0 / J)) / (2.0 * pi)
+    f_anti = sqrt(ks / J) / (2.0 * pi)
+    print(f"  {Jt:8.1e}   {n:5d}   {stack:12s}   {J:.3e}   {f_res:5.1f}  {f_anti:6.2f}")
+
+print()
+print("  Encoders: MT6701 ABZ on the motor + AS5048A SPI on the load — the")
 print("  deflection is measured differentially, so ks is calibrated from the")
 print("  *torque* reference, never from datasheet stiffness.")

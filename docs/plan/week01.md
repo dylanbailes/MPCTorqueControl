@@ -6,9 +6,9 @@
 
 - [ ] `pip install -r requirements.txt` clean on a fresh venv.
 - [ ] `python -m sim.run_experiments` runs end-to-end and `results/results.json`
-      regenerates with numbers close to the committed ones (MPC ≈ 5.7 vs
+      regenerates with numbers close to the committed ones (MPC ≈ 4.0 vs
       PID ≈ 32.9 mN·m on smooth tracking).
-- [ ] `pytest test/ -q` → 33 passed.
+- [ ] `pytest test/ -q` → all tests passed.
 - [ ] You can explain, out loud, the **three loops** of the stack and what
       each one does, and can point at the file that implements each.
 - [ ] You have ordered the hardware from `hardware/BOM.md` (it arrives before
@@ -126,18 +126,19 @@ error in sim. The price: a QP solve every 0.5 ms on a $20 MCU (week 9–10).
 5. **Run the MATLAB scripts (1 h, if you have MATLAB).**
    `addpath('model/matlab'); sea_plant_model; mpc_design; system_id;` —
    confirms the second toolchain works before you need it.
-6. **Order hardware (2 h).** Work through `hardware/BOM.md` and
-   `hardware/spring_design.py`. Order: B-G431B-ESC1, motor, 2× AS5048A,
-   24 V PSU, drill rod, load-disc material. Note lead times; if the motor
-   is back-ordered pick a Kt ≈ 0.1 N·m/A equivalent (the sim tolerates
-   ±20% — re-run the sim with the new Kt to confirm).
+6. **Order hardware (2 h).** Work through `docs/plan/ordering_checklist.md`
+   (the two-batch order split, DOA flags, and on-arrival acceptance
+   checks) with `hardware/BOM.md` for prices/links and
+   `hardware/spring_design.py` for the spring sizing. Place Order A now.
+   If the motor is back-ordered, pick a Kt ≈ 0.1 N·m/A equivalent (the
+   sim tolerates ±20% — re-run the sim with the new Kt to confirm).
 7. **Journal (0.5 h).** Start `docs/plan/TRACKER.md` habits: tick week 1.
 
 ## Verification
 
-- `pytest test/ -q` → 33 passed.
+- `pytest test/ -q` → all tests passed.
 - `results/results.json` regenerated; `tracking.smooth.MPC.rms_error_mNm`
-  ≈ 5.7 ± 0.5.
+  ≈ 4.0 ± 0.5.
 - You can answer: "Where does the 18 Hz resonance come from, and which file
   would I edit to change it?"
 

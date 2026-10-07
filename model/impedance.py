@@ -1,4 +1,4 @@
-"""Impedance control and human-safety layer.
+"""Impedance control and experimental collision-response layer.
 
 Two pieces:
 
@@ -8,7 +8,7 @@ Two pieces:
 
        tau_ref = k_imp (theta_d - theta_l) + b_imp (0 - omega_l)
 
-   With a *torque-controlled* SEA this gives human-safe, backdrivable
+   With a *torque-controlled* SEA this aims for compliant, backdrivable
    behavior: push the output and it yields with programmable stiffness.
 
 2. **Collision detection** — a momentum (residual) observer on the motor
@@ -56,6 +56,7 @@ class ImpedanceSafety:
 
     def __init__(self, cfg: ImpedanceConfig | None = None):
         self.cfg = cfg if cfg is not None else ImpedanceConfig()
+        self.friction_model = None  # configuration survives state resets
         self.reset()
 
     def reset(self) -> None:
@@ -63,7 +64,6 @@ class ImpedanceSafety:
         self.t_coll_accum = 0.0
         self.t_stall_accum = 0.0
         self.coll = CollisionState()
-        self.friction_model = None  # learned tau_fric_hat(omega_m)
 
     def set_friction_model(self, f) -> None:
         """Attach a learned friction model tau_fric_hat(omega) for the observer."""
@@ -112,7 +112,7 @@ class ImpedanceSafety:
         self.coll.history.append((source, self.coll.time, self.coll.tau_coll_hat))
 
     def safe_command(self, u_cmd: float) -> float:
-        """Apply safety: on collision, ramp the current command to zero."""
+        """On detection, immediately set the current command to zero."""
         if self.coll.detected:
             return 0.0
         return u_cmd

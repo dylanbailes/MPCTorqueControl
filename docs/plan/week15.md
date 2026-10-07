@@ -44,7 +44,7 @@ written deliberately, and the video is the artifact that survives a
 Pick the three strongest, most defensible numbers and make them the
 spine of every pitch:
 
-- MPC vs. PID torque tracking (sim 5.8×; hardware ≥ 2× — report your
+- MPC vs. PID torque tracking (sim 8×; hardware ≥ 2× — report your
   actual).
 - Disturbance steady-state error (sim 15×; hardware ≥ 4×).
 - Collision detection latency (sim 102 ms; hardware < 150 ms).

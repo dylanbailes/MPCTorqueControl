@@ -1,104 +1,226 @@
 {
+  "schema_version": 2,
+  "provenance": {
+    "simulation_only": true,
+    "fast": false,
+    "plant_parameters": {
+      "R": 4.8,
+      "L": 0.0026,
+      "Kt": 0.1562,
+      "Ke": 0.1562,
+      "Jm": 3e-05,
+      "bm": 3e-05,
+      "tau_c_m": 0.008,
+      "tau_st_m": 0.012,
+      "w_st_m": 0.6,
+      "bv_m": 0.0002,
+      "cog_A6": 0.003,
+      "cog_phi6": 0.3,
+      "cog_A12": 0.0015,
+      "cog_phi12": 1.1,
+      "rip_frac": 0.01,
+      "ks": 1.0,
+      "knl": 0.0,
+      "Jl": 0.0012,
+      "bl": 0.0001,
+      "tau_c_l": 0.004,
+      "tau_st_l": 0.006,
+      "w_st_l": 0.4,
+      "bv_l": 8e-05,
+      "Vbus": 24.0,
+      "f_cur": 10000.0,
+      "w_cur_bw": 9424.77796076938,
+      "enc_bits": 14,
+      "enc_noise_lsb": 1.0
+    },
+    "mpc_config": {
+      "T": 0.0005,
+      "N": 30,
+      "Q_y": 30000.0,
+      "R_u": 0.005,
+      "S_rate": 0.3,
+      "u_max": 3.0,
+      "du_max": 1.5,
+      "solver": "admm",
+      "max_iter": 20
+    },
+    "pid_config": {
+      "kp": 15.0,
+      "ki": 60.0,
+      "kd": 0.3,
+      "Tf": 0.001989438469055478,
+      "u_max": 3.0,
+      "du_max": 1.5
+    },
+    "residual_config": {
+      "ridge": 0.001,
+      "eps": 0.05,
+      "u_ff_max": 1.0,
+      "lag": 2
+    },
+    "integration_dt_s": 2e-05,
+    "durations_s": {
+      "calib": 8.0,
+      "id": 5.0,
+      "train": 6.0,
+      "eval": 6.0,
+      "disturb": 4.0,
+      "coll": 3.5
+    },
+    "fixture": {
+      "k_block": 10000.0,
+      "d_block": 50.0
+    },
+    "seeds": {
+      "spring_calibration": 7,
+      "system_id_excitation": 3,
+      "system_id_measurement_noise": 7,
+      "training": 11,
+      "evaluation": 13,
+      "disturbance": 17,
+      "collision": 5
+    },
+    "python_version": "3.12.14",
+    "dependencies": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "matplotlib": "3.11.2"
+    }
+  },
   "plant": {
-    "Jm": 8e-05,
+    "Jm": 3e-05,
     "Jl": 0.0012,
     "ks": 1.0,
     "knl": 0.0,
-    "Kt": 0.1,
-    "resonance_Hz": 18.37762984739307
+    "Kt": 0.1562,
+    "resonance_Hz": 29.418561775602978
   },
   "identified": {
-    "ks": 0.9848753710561304,
+    "ks": 0.9865401319561683,
     "knl": 0.0,
+    "Jm_td": 2.974152914009537e-05,
+    "Jm_freq": 2.9571380718249358e-05,
+    "jm_prior_weight": 0.5,
+    "f_res_est_hz": 29.430455584565426,
+    "fd_coherence": 0.9515989726419277,
+    "fd_vs_td_rel_diff": 0.00572090362417275,
     "rel_errors": {
-      "Jm": 0.0927038460384762,
-      "bm": 5.382207078018226,
-      "Jl": 0.013407680076431876,
-      "bl": 0.8001484473891909,
-      "ks": 0.015124628943869567,
+      "Jm": 0.011488515465433629,
+      "bm": 0.17424667105494862,
+      "Jl": 0.013046922097021236,
+      "bl": 0.015266780205371547,
+      "ks": 0.013459868043831702,
       "knl": 0.0
     }
   },
   "learned_disturbance": {
-    "heldout_r2": 0.6210900554040584,
+    "heldout_r2": 0.9861883384987441,
     "beta": [
-      0.0047152395574856405,
-      0.014438542822629468,
-      -0.003303143609733057,
-      0.003203349370770145,
-      -0.010343646375785616,
-      0.0007329122914681925,
-      0.0025163449589482626,
-      -0.001776791547641222,
-      -0.00920115211722134
+      -0.12880771188606283,
+      0.001051612955080626,
+      -0.04419128281140408,
+      -0.12149449103790606,
+      0.16606593271057904,
+      -0.010824500645215486,
+      -0.03554727385873065,
+      0.15509330890008347,
+      0.004188801238660316,
+      0.042397427237676505,
+      0.0022186527942704604,
+      -0.02372446632596071,
+      -0.006451158367838963
+    ],
+    "friction_beta": [
+      -0.0077365269,
+      0.0143497046,
+      -0.00340821175
     ]
   },
   "tracking": {
     "smooth": {
       "PID": {
-        "rms_error_mNm": 32.876665428584325,
-        "max_error_mNm": 80.47000737862759,
-        "rms_error_overall_mNm": 35.58685522288882
+        "rms_error_mNm": 24.772153208136682,
+        "max_error_mNm": 61.062547019258226,
+        "rms_error_overall_mNm": 27.32036209963835
       },
       "MPC": {
-        "rms_error_mNm": 5.6776863230609775,
-        "max_error_mNm": 43.363079289148956,
-        "rms_error_overall_mNm": 15.561569252617806
+        "rms_error_mNm": 2.9832311893309837,
+        "max_error_mNm": 8.845746763729734,
+        "rms_error_overall_mNm": 7.099188885694887
       },
       "MPC+FF-ID": {
-        "rms_error_mNm": 5.534406137954262,
-        "max_error_mNm": 42.98538431473348,
-        "rms_error_overall_mNm": 15.622059135777658
+        "rms_error_mNm": 2.928059201806108,
+        "max_error_mNm": 8.67779858483264,
+        "rms_error_overall_mNm": 7.064467102297088
       },
       "MPC+learned": {
-        "rms_error_mNm": 5.654878786808917,
-        "max_error_mNm": 42.22999436590258,
-        "rms_error_overall_mNm": 13.223391023364314
+        "rms_error_mNm": 2.979136448721256,
+        "max_error_mNm": 8.845746763729734,
+        "rms_error_overall_mNm": 6.755581442605758
       }
     },
     "edges": {
       "PID": {
-        "rms_error_mNm": 41.81790381106476,
-        "max_error_mNm": 133.66100045050268,
-        "rms_error_overall_mNm": 42.37821876609245
+        "rms_error_mNm": 31.62981791949889,
+        "max_error_mNm": 125.57112115391911,
+        "rms_error_overall_mNm": 32.85660355562116
       },
       "MPC": {
-        "rms_error_mNm": 22.616294347055558,
-        "max_error_mNm": 132.0115079950036,
-        "rms_error_overall_mNm": 28.042069511899573
+        "rms_error_mNm": 7.612262033938859,
+        "max_error_mNm": 101.58824692387421,
+        "rms_error_overall_mNm": 10.659990471251279
       },
       "MPC+learned": {
-        "rms_error_mNm": 19.336709983392325,
-        "max_error_mNm": 115.5043332644254,
-        "rms_error_overall_mNm": 24.145189886665108
+        "rms_error_mNm": 6.992896863028554,
+        "max_error_mNm": 101.20991352164945,
+        "rms_error_overall_mNm": 10.169681618880713
+      }
+    }
+  },
+  "identified_model_impact": {
+    "model_Jm": 2.9655344536036992e-05,
+    "true_Jm": 3e-05,
+    "Jm_rel_diff": -0.011488515465433629,
+    "jm_impact": {
+      "smooth": {
+        "true_RMS_mNm": 2.988920272282124,
+        "identified_RMS_mNm": 2.9832311893309837,
+        "delta_RMS_mNm": -0.005689082951140456,
+        "delta_pct": -0.19033906671577228
+      },
+      "edges": {
+        "true_RMS_mNm": 7.635988159842671,
+        "identified_RMS_mNm": 7.612262033938859,
+        "delta_RMS_mNm": -0.023726125903811734,
+        "delta_pct": -0.31071454548065036
       }
     }
   },
   "disturbance": {
     "PID": {
-      "peak_error_mNm": 48.33635665452552,
-      "steady_error_mNm": 15.793148780602298
+      "peak_error_mNm": 36.35564021890592,
+      "steady_error_mNm": 9.611502543359629
     },
     "MPC": {
-      "peak_error_mNm": 3.0793954027988626,
-      "steady_error_mNm": 1.0831885103681382
+      "peak_error_mNm": 2.9704896499809506,
+      "steady_error_mNm": 1.793873342055922
     },
     "MPC+learned": {
-      "peak_error_mNm": 3.765040519727092,
-      "steady_error_mNm": 0.9081898388889811
+      "peak_error_mNm": 2.9704896499809506,
+      "steady_error_mNm": 1.166585530352596
     }
   },
   "collision": {
     "detected": true,
     "grab_time_s": 0.1,
-    "detection_latency_ms": 101.5,
-    "post_collision_peak_torque_mNm": 201.29771992514026
+    "detection_latency_ms": 101.0,
+    "post_collision_peak_torque_mNm": 201.81329576807872
   },
   "mpc": {
     "solver": "admm",
     "qp_iterations": 20,
-    "horizon_steps": 20,
+    "horizon_steps": 30,
     "period_ms": 0.5
   },
-  "wall_seconds": 257.93226957321167
+  "wall_seconds": 463.30713152885437
 }

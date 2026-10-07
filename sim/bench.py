@@ -8,7 +8,8 @@
                 -> safety (collision clamp)
                     -> plant (internal FOC current loop)
 
-`run_bench` advances the plant at 100 kHz while controllers sample at fs.
+`run_bench` advances the plant at its configured integration rate while
+controllers sample at fs.
 """
 
 from __future__ import annotations
@@ -26,13 +27,24 @@ class SeaLoop:
 
     def __init__(self, torque_ctrl, plant: SeaPlant,
                  impedance: ImpedanceSafety | None = None,
-                 friction_ff=None, learned=None):
+                 friction_ff=None, learned=None, u_max=None):
         self.torque_ctrl = torque_ctrl
         self.plant = plant
         self.imp = impedance
         self.friction_ff = friction_ff   # tau_fric_hat(omega_m) -> N.m
         self.learned = learned           # LearnedResidual -> d_hat
         self.theta_d = 0.0
+        # Augmentation shares the controller's current budget.
+        controller_limit = (torque_ctrl.cfg.u_max if isinstance(torque_ctrl, SeaMPC)
+                            else MPCConfig().u_max)
+        self.u_max = u_max if u_max is not None else controller_limit
+
+    def reset(self) -> None:
+        """Reset controller and learned-model state (history) at run start."""
+        if hasattr(self.torque_ctrl, "reset"):
+            self.torque_ctrl.reset()
+        if self.learned is not None and hasattr(self.learned, "reset"):
+            self.learned.reset()
 
     def update(self, t: float, obs: dict, tau_ref_ext: float, dt: float) -> float:
         p = self.plant.p
@@ -60,7 +72,11 @@ class SeaLoop:
                                      obs["omega_m"], dt)
             self.imp.check(obs["tau_s_est"], obs["omega_l"], tau_ref, dt)
             u = self.imp.safe_command(u)
-        return float(np.clip(u, -3.0, 3.0))
+        u = float(np.clip(u, -self.u_max, self.u_max))
+        if isinstance(self.torque_ctrl, SeaMPC):
+            # Next QP's rate penalty/bounds use the command actually applied.
+            self.torque_ctrl.u_prev = u
+        return u
 
 
 def run_bench(plant: SeaPlant, loop: SeaLoop, ref_fn, duration: float,
@@ -82,7 +98,9 @@ def run_bench(plant: SeaPlant, loop: SeaLoop, ref_fn, duration: float,
     n = int(duration * fs)
     steps_per_tick = max(1, int(1.0 / (fs * plant.dt)))
     loop.theta_d = theta_d
-    if hasattr(loop.torque_ctrl, "reset"):
+    if hasattr(loop, "reset"):
+        loop.reset()
+    elif hasattr(loop.torque_ctrl, "reset"):
         loop.torque_ctrl.reset()
     if loop.imp is not None:
         loop.imp.reset()
@@ -121,7 +139,9 @@ def run_bench(plant: SeaPlant, loop: SeaLoop, ref_fn, duration: float,
                    tau_dist_motor=tau_dm)
 
         rec["t"][k] = t
-        rec["tau_ref"][k] = tau_ref
+        rec["tau_ref"][k] = (loop.imp.torque_reference(theta_d, obs["theta_l"],
+                                                       obs["omega_l"])
+                              if loop.imp is not None else tau_ref)
         rec["tau_s_est"][k] = obs["tau_s_est"]
         rec["tau_s_true"][k] = obs["tau_s_true"]
         rec["u_cmd"][k] = u
@@ -143,10 +163,20 @@ def run_bench(plant: SeaPlant, loop: SeaLoop, ref_fn, duration: float,
 
 
 def make_mpc(p: PlantParams, cfg: MPCConfig | None = None,
-             k_block: float = 0.0) -> SeaMPC:
+             k_block: float = 0.0, d_block: float = 0.0,
+             jm: float | None = None) -> SeaMPC:
+    """Build the condensed torque MPC for a blocked-output rig.
+
+    jm optionally overrides the prediction model's motor inertia.  The MPC
+    is a *model-based* controller: it should be built from the *identified*
+    plant (e.g. the fused Jm from system ID), not the nominal plant value.
+    If jm is None the nominal p.Jm is used (matching the plant originally
+    built the model from).  Only Jm is overridable so tracking sensitivity
+    to the single most uncertain inertia is easy to quantify in isolation.
+    """
     cfg = cfg if cfg is not None else MPCConfig()
-    model = LinearSeaModel(p.Jm, p.bm, p.Jl, p.bl, p.ks, p.Kt, cfg.T,
-                           k_block=k_block)
+    model = LinearSeaModel(jm if jm is not None else p.Jm, p.bm, p.Jl, p.bl,
+                           p.ks, p.Kt, cfg.T, k_block=k_block, d_block=d_block)
     return SeaMPC(model, cfg)
 
 

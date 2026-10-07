@@ -21,10 +21,25 @@ dist/
 STM32CubeIDE/
 *.ioc.bak
 
-# Generated experiment artifacts (keep plots/JSON in results/ if you want them committed;
-# uncomment to ignore instead)
-# results/plots/*.png
-# results/*.json
+# Local assistant state and private tooling
+.agents/
+.freebuff/
+.local/
+
+# Scratch experiments; curated evidence in results/ is versioned
+results/scratch/
+results/test_*
+
+# Downloaded CAD is reference material; redistribution rights are unverified
+hardware/cad/step/
+hardware/cad/stl/
+
+# Credentials and machine-specific configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
 
 # OS
 .DS_Store

@@ -9,8 +9,8 @@
 - [ ] `results/learned_model.h` regenerated; feedforward enabled in
       firmware (the `learned_feedforward()` hook in `tasks.c`).
 - [ ] Measured improvement over plain MPC on at least one metric
-      (targets from sim: disturbance steady-state 1.08 → 0.91 mN·m;
-      edge-rich overall 28 → 24 mN·m). If hardware shows *no* improvement,
+      (targets from sim: disturbance steady-state 1.06 → 0.81 mN·m;
+      edge-rich overall 14.8 → 13.9 mN·m). If hardware shows *no* improvement,
       you've found a real limitation — document it, don't fake it.
 - [ ] You can explain the design split (learned vs. calibrated) in one
       minute — this is the project's thesis statement.
@@ -20,8 +20,9 @@
 M4. This is the "learning" in the project title, and the part that makes
 it a research-y resume item rather than a textbook MPC demo. The honest
 framing (from the sim results): the learned model's *headline* gain on
-smooth tracking is modest (~15%) because deflection-feedback torque
-control already rejects friction automatically; its real value is in
+smooth tracking is nil (plain MPC already delivers 8× over PID, because
+deflection-feedback torque control already rejects friction
+automatically); its real value is in
 disturbance steady-state error, edge tracking, and (week 13) enabling a
 collision observer that doesn't false-trigger. Know this before you start,
 so you measure the right things.
@@ -74,7 +75,7 @@ equation above with the *measured* iq and ωm, then regress.
 **Honesty tools:**
 
 - **Held-out R²**: fit on the first half of the log, evaluate on the
-  second. R² = 1 − SSE_resid/SSE_mean. Sim value: 0.62 (the rest is
+  second. R² = 1 − SSE_resid/SSE_mean. Sim value: 0.71 (the rest is
   measurement noise and current-loop lag — a bench R² of 0.4–0.7 is
   expected and fine).
 - **Ablation**: measure MPC and MPC+learned on the *same* bench script
@@ -127,7 +128,7 @@ disturbance observers), and it's what `SeaMPC.step` already implements
 - Held-out R² ≥ 0.5 (report the number; 0.4 is still publishable-honest,
   < 0.3 means the residual computation is wrong — check ωm sign and ks).
 - MPC+learned ≥ MPC on at least one metric by ≥ 5% relative (sim
-  deltas: −15% overall edges, −16% disturbance steady).
+  deltas: −6% overall edges, −24% disturbance steady; smooth unchanged).
 - No regression on the other metrics (> −5%).
 - Coefficients within 2× of sim truth.
 
@@ -142,7 +143,10 @@ disturbance observers), and it's what `SeaMPC.step` already implements
   `learned_feedforward()`.
 - **Overfitting the noise**: with 9 coefficients and thousands of samples,
   R² on the fit set will look great — only the *held-out* R² is honest.
-- **Expecting a big smooth-tracking win.** The sim says ~15% overall; if
-  you present a 3× improvement on smooth tracking, you've almost surely
-  measured something wrong (or overfit). The honest story is: small,
-  real gains everywhere, big enabler for safety (week 13).
+- **Expecting a big smooth-tracking win.** The sim shows no gain on
+  smooth tracking (the honest result) — the measured wins are disturbance
+  steady-state (−24%) and edge overall (−6%). If you present a 3×
+  improvement on smooth tracking, you've almost surely measured something
+  wrong (or overfit). The honest story is: plain MPC already wins big;
+  the learning adds real, smaller gains and is the enabler for safety
+  (week 13).

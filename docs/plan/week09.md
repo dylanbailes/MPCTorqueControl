@@ -158,8 +158,8 @@ PID acts on the torque *error* it has; MPC acts on the torque *predicted*
   procedure is the same, the numbers shift).
 - **Believing the unconstrained optimum.** The box constraint (u_max,
   du_max) is doing real work — the unconstrained solution overdrives (a
-  genuine finding during development: unconstrained u₀ = 49.6 A on a
-  6 A limit). Always look at the constrained solution.
+  genuine finding during development: the unconstrained u₀ comes back
+  tens of amps on a ~4 A limit). Always look at the constrained solution.
 - **Horizon too short** (N < ~10) → the MPC can't see the resonance cycle
   (T_res ≈ 55 ms ≈ 110 steps!); the finite-horizon truncation then
   produces weird terminal behavior (the optimizer "wastes" the tail —

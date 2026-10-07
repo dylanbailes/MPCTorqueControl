@@ -6,8 +6,8 @@
 /* platform glue (implement per CubeMX project) */
 float  adc_phase_a(void);
 float  adc_phase_b(void);
-uint16_t spi1_read_word(uint8_t reg);   /* motor encoder  */
-uint16_t spi2_read_word(uint8_t reg);   /* output encoder */
+uint16_t spi1_read_word(uint16_t reg);  /* legacy motor SPI scaffold */
+uint16_t spi2_read_word(uint16_t reg);  /* output SPI scaffold */
 void   pwm_update(void *foc);           /* write duty -> TIM1 */
 void   cdc_send(const char *s, int len);
 void   start_timers(void);

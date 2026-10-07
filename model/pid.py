@@ -31,6 +31,7 @@ class PidTorqueController:
     def reset(self) -> None:
         self.err_int = 0.0
         self.err_d_prev = 0.0
+        self.der_filt = 0.0
         self.u_prev = 0.0
 
     def step(self, tau_ref: float, tau_est: float, dt: float) -> float:

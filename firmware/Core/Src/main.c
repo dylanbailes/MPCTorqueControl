@@ -12,6 +12,7 @@
  */
 
 #include "main.h"
+#error "Integration scaffold: implement and validate board support before building"
 #include "tasks.h"
 
 /* generated model headers live in Core/Inc (copied from results/) */
@@ -80,7 +81,7 @@ float adc_phase_b(void) {
     return 0.0f;   /* placeholder: second phase or reconstruct from i_a+i_b */
 }
 
-uint16_t spi1_read_word(uint8_t reg) {
+uint16_t spi1_read_word(uint16_t reg) {
     uint8_t tx[2] = { (uint8_t)(0x40 | (reg >> 6)), (uint8_t)(reg << 2) };
     uint8_t rx[2] = { 0, 0 };
     HAL_GPIO_WritePin(ENC1_CS_GPIO_Port, ENC1_CS_Pin, GPIO_PIN_RESET);
@@ -89,7 +90,7 @@ uint16_t spi1_read_word(uint8_t reg) {
     return (uint16_t)((rx[0] << 8) | rx[1]);
 }
 
-uint16_t spi2_read_word(uint8_t reg) {
+uint16_t spi2_read_word(uint16_t reg) {
     uint8_t tx[2] = { (uint8_t)(0x40 | (reg >> 6)), (uint8_t)(reg << 2) };
     uint8_t rx[2] = { 0, 0 };
     HAL_GPIO_WritePin(ENC2_CS_GPIO_Port, ENC2_CS_Pin, GPIO_PIN_RESET);

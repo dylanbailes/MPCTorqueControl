@@ -93,7 +93,7 @@ instead. That's a *better* engineering answer than a port you don't need.
    the high-time over 1000 solves via a spare timer or the USB telemetry.
    Record mean + worst-case. Confirm < 200 µs worst case.
 6. **Constraint test on bench (1.5 h).** Command a reference that exceeds
-   the limits; confirm u saturates at u_max (6 A) and the slew never
+   the limits; confirm u saturates at u_max (4 A) and the slew never
    exceeds du_max (1.5 A/step). Compare the logged u against the Python
    MPC's prediction for the same trajectory.
 7. **Tracker (0.5 h).** Record solve times, float32-vs-float64 max diff,

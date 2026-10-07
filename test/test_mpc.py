@@ -36,9 +36,10 @@ def test_mpc_respects_input_and_slew_constraints():
     rng = np.random.default_rng(1)
     for _ in range(50):
         x0 = rng.normal(size=4) * 0.1
+        previous = mpc.u_prev
         u = mpc.step(x0, 0.3)
         assert abs(u) <= cfg.u_max + 1e-9
-        assert abs(u - mpc.u_prev) <= cfg.du_max + 1e-9 or _ == 0
+        assert abs(u - previous) <= cfg.du_max + 1e-9
     # slew limit after a large previous input
     mpc.u_prev = 4.0
     u = mpc.step(np.zeros(4), 0.3)

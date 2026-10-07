@@ -5,7 +5,8 @@
 ## Exit criteria (week done when…)
 
 - [ ] Motor spins under FOC; the current loop holds iq_ref at 10 kHz with
-      < 5% steady-state error up to ±5 A (within the bus limit).
+      < 5% steady-state error up to ±2 A (bus-limited: 24 V / 13.7 Ω ≈ 1.75 A
+      stall with the GM5208-24).
 - [ ] d-axis current regulated to ~0 (±0.2 A) while q-axis is driven.
 - [ ] Commutation is correct in both directions (no stall, no runaway).
 - [ ] Electrical-angle alignment procedure documented and repeatable.
@@ -110,7 +111,7 @@ limit used everywhere in the repo: `v_max = Vbus/√3` ≈ 13.9 V at 24 V bus).
 ## Verification
 
 - i_q step: rise time ≈ 1/ω_bw ≈ 0.1 ms, overshoot < 10%, no limit cycles.
-- i_d held at ~0 while i_q tracks ±5 A.
+- i_d held at ~0 while i_q tracks ±2 A.
 - Both rotation directions commanded through the torque loop's sign.
 
 ## Pitfalls

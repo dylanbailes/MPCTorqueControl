@@ -15,7 +15,7 @@ static float wrap_pi(float x) {
     return x;
 }
 
-void encoder_init(Encoder *e, uint16_t (*read_word)(uint8_t reg)) {
+void encoder_init(Encoder *e, uint16_t (*read_word)(uint16_t reg)) {
     e->read_word = read_word;
     e->angle = 0.0f;
     e->velocity = 0.0f;

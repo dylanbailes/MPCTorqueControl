@@ -6,8 +6,8 @@
  * constant affine map
  *     g(U) = MPC_MX x0 + MPC_MY yref + MPC_MPREV u_prev
  * and the box constraints are the current + slew limits.  The ADMM solver
- * runs 25 warm-started iterations — well within the 2 kHz torque-loop
- * budget on the G431 at 170 MHz. */
+ * uses the exported iteration budget. Execution time on the G431 remains
+ * to be measured. */
 
 static AdmmSolver s_admm;
 static float s_lo[MPC_N], s_hi[MPC_N], s_g[MPC_N], s_u[MPC_N];

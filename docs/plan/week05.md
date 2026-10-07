@@ -4,8 +4,8 @@
 
 ## Exit criteria (week done when…)
 
-- [ ] Rig assembled: motor → torsion bar → load disc, rigid base, both
-      encoders mounted on their shafts.
+- [ ] Rig assembled: motor → torsion bar → load disc, rigid base, MT6701
+      motor encoder and AS5048A load encoder mounted on their shafts.
 - [ ] Free-spin test: with the load free, a slow current ramp produces
       smooth motion with no binding; Δθ stays within ±0.05 rad during slow
       motion (no gross eccentricity or preload).
@@ -92,9 +92,9 @@ Two easy methods:
 2. **Assemble the rig (3 h).** Motor bolted to base; bar coupled to motor
    shaft hub on one end and load disc hub on the other; load disc with
    added mass to reach Jl ≈ 1.2e-3 kg·m² (see `spring_design.py` sizing:
-   ~250 g at ~98 mm radius). Mount both AS5048A boards with magnets
-   centered — re-run the week-3 noise test to confirm mounting didn't
-   introduce eccentricity.
+   ~250 g at ~98 mm radius). Mount the integrated MT6701 magnet/encoder on
+   the motor and the AS5048A board/magnet on the load; re-run the week-3
+   noise and ABZ/I²C agreement tests after mounting.
 3. **Free-spin test (1.5 h).** Command a slow current ramp (±1 A, 0.2 Hz)
    through the current loop; watch θm, θl, Δθ in the dashboard. Δθ should
    track smoothly; any stick-slip (Δθ staircase) is friction at a coupling

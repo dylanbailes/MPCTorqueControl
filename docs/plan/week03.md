@@ -4,8 +4,8 @@
 
 ## Exit criteria (week done when…)
 
-- [ ] Both AS5048A encoders read reliably at ≥ 2 kHz over SPI (motor + load
-      shafts).
+- [ ] MT6701 motor encoder reads reliably through ABZ timer quadrature at ≥
+      2 kHz; load-side AS5048A reads reliably at ≥ 2 kHz over SPI.
 - [ ] Raw angle noise measured: < 1 LSB standard deviation after
       decimation; dropout/garbage frames detected and flagged.
 - [ ] Velocity estimates from the *quantized* angles are smooth enough to
@@ -23,14 +23,20 @@ after it.
 
 ## Theory
 
-### The AS5048A (14-bit magnetic encoder)
+### The selected encoders: MT6701 motor ABZ + AS5048A load SPI
 
-A magnetic encoder reads the angle of a diametrically magnetized magnet
-rotating over the chip:
+Both encoders read the angle of a diametrically magnetized magnet rotating
+over the chip. The selected motor-side MT6701 exposes ABZ and I²C; the
+load-side AS5048A remains the torque-critical 14-bit SPI measurement.
 
-- **14-bit resolution**: 16384 counts/turn = 360°/16384 ≈ 0.022° per LSB.
-- **SPI**: read the 14-bit angle register (2 bytes, MSB-first); the chip
-  also exposes an error/parity bit you must check on every frame.
+- **MT6701 ABZ:** configure up to 1,024 PPR and use 4× timer decoding,
+  yielding 4,096 counts/revolution for deterministic motor angle/velocity.
+- **MT6701 I²C:** retain for absolute-angle, zero-offset, configuration, and
+  ABZ-count diagnostics; it is not the primary real-time feedback path.
+- **AS5048A SPI:** read the 14-bit angle register (2 bytes, MSB-first); check
+  its error/parity bit on every frame and retry corrupted reads.
+- **Magnet/gap:** use the required diametric magnet, center it carefully, and
+  verify the module-specific air gap.
 - **Mounting matters**: the magnet must be centered on the shaft within
   ~0.1 mm and at the rated gap (0.5–1.5 mm typical). Eccentricity shows up
   as a **once-per-rev sinusoidal error** in the angle — you can measure it
@@ -73,11 +79,11 @@ right topology for torque, and it's worth stating in your writeup.
 
 ## Build plan
 
-1. **SPI bring-up (2 h).** Configure SPI1 (motor encoder) and SPI2 (load
-   encoder) as masters, ~1–10 MHz, 8-bit frames; CS lines as GPIO.
-   Implement `firmware/Core/Src/encoder.c`: `enc_read()` returns angle +
-   error flag; **re-read the register on error** (transient glitches are
-   common; a single bad frame must never enter the control path).
+1. **Encoder-interface bring-up (2 h).** Configure a timer in encoder mode
+   for MT6701 A/B, connect Z to an index/GPIO input, and configure I²C for
+   MT6701 diagnostics. Configure SPI for the load-side AS5048A. Implement
+   the driver so bad AS5048A frames are retried and ABZ counter wraparound is
+   handled with signed modular arithmetic.
 2. **Rate test (2 h).** Stream both angles at 2 kHz for 60 s, stationary.
    Plot histograms of consecutive-difference noise. Targets: no frames
    with > 2 LSB jumps; error flags < 0.1%.
@@ -103,10 +109,14 @@ right topology for torque, and it's worth stating in your writeup.
 - `python scripts/plot_telemetry.py --replay log.csv` reproduces the live
   dashboard offline.
 
-## Pitfalls
-
-- **Unchecked parity/error bit.** One corrupted frame = one giant velocity
-  spike = one spurious "collision" in week 13. Check every frame, always.
+## Pitfalls- **Unchecked parity/error bit.** A corrupted AS5048A frame can create a giant
+  velocity spike and a false collision; check every SPI frame and retry.
+- **ABZ voltage mismatch.** Verify A/B/Z logic levels before connecting to the
+  STM32; level-shift 5 V push-pull outputs and add 3.3 V pull-ups for
+  open-drain outputs as required.
+- **ABZ configuration mismatch.** Record the MT6701 PPR and timer decode mode;
+  a wrong counts/revolution value corrupts velocity and electrical-angle
+  scaling.
 - **Eccentric magnet.** Symptom: once-per-rev sinusoid in the noise. Fix
   mechanically (re-center), don't filter it away blindly — a 0.1 mm
   eccentricity can be a 0.3° error, which is *torque error* at ks=1.

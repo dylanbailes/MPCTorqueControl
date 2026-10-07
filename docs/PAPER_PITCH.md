@@ -1,100 +1,53 @@
-# Paper pitch — what this project contributes
+# Research proposal: residual feedforward for SEA torque control
 
-This is the *research framing* of the project: the question, the gap, and
-the evidence — written so you can pitch it in a grad-school application, a
-lab meeting, or a 4-page workshop paper (ICRA/CDC-style format). Everything
-below is reproducible from this repo; the sim numbers are in
-`docs/RESULTS.md`.
+This document proposes follow-up experiments. It is not a publication,
+a demonstrated novelty claim, or evidence of completed STM32/hardware work.
+Current measurements are in [RESULTS.md](RESULTS.md); implementation status
+is in [STATUS.md](STATUS.md).
 
-## Title (working)
+## Research question
 
-**Learning to Compensate Series-Elastic Actuators: Embedded Model-Predictive
-Torque Control with Residual Disturbance Feedforward**
+When does a compact learned motor-side residual improve a constrained
+torque controller for a series-elastic actuator, compared with plain MPC
+and a simpler identified friction model?
 
-## The problem
+The spring introduces a lightly damped mode, while friction, current-loop
+dynamics, and identification error affect the torque estimate and command.
+Feedforward can compensate some residuals but also consumes current authority.
+The useful question is the operating range where that tradeoff pays off.
 
-Series-elastic actuators (SEAs) are the backbone of safe physical
-interaction — from legged robots (MIT Cheetah, ANYmal) to collaborative
-arms. Their control problem is torque tracking through a compliant element,
-which is exactly the case where naive PID performs worst: the resonance
-limits bandwidth, friction and cogging sit between the current command and
-the spring torque, and the torque *estimate* (spring deflection × stiffness)
-is only as good as the calibration.
+## Existing evidence
 
-Two things make this hard in practice:
+The repository implements a two-mass simulation, spring/inertia identification,
+PID and condensed MPC, a causal residual fit, and portable C control modules.
+In the selected 4015 scenario, MPC reduces tracking error relative to the
+fixed PID configuration. Learned FF has little effect on smooth tracking,
+with gains on some edge-rich and disturbance metrics. The exact comparison
+and measurement windows are in [the generated results](RESULTS.md).
 
-1. **The plant is imperfectly known** — friction, cogging, and torque ripple
-   are significant (here: ~10–15% of rated torque) and never in the linear
-   model an MPC uses.
-2. **The computation must run in microseconds on a $20 microcontroller** —
-   general-purpose nonlinear MPC is out of reach; the field-standard answer
-   is a condensed QP with an embedded solver.
+The held-out fit score is a diagnostic: residuals include inertia mismatch
+and electrical dynamics as well as friction/cogging. Host C comparisons
+establish numerical agreement for tested cases, not complete board behavior.
+The collision demo uses PID, impedance, and a stall/residual latch; it does
+not establish that learning is necessary for detection or prove human safety.
 
-## The gap this project addresses
+## Experiments needed to support a paper
 
-The robotics literature has two separate threads: *learning residual
-dynamics* for feedforward compensation (mostly validated in simulation or
-on large, expensive platforms) and *embedded MPC* (mostly validated on
-rigid-joint systems where the compliance problem is absent). Almost nobody
-demonstrates the combination on a compliant actuator where both are
-genuinely needed — and where the *compliant element itself* is designed by
-the builder (a mechanical-design degree of freedom the controls literature
-usually takes as given).
+1. Establish a measured hardware model, calibrated torque reference, actual
+   sampling/compute timing, and uncertainty in inertia/stiffness estimates.
+2. Compare separately tuned PID, plain MPC, friction FF, and learned FF with
+   matched current budgets across multiple references and load fixtures.
+3. Test held-out operating ranges, sensor noise, measurement delay,
+   temperature changes, and saturation; report repeated-run uncertainty.
+4. Ablate lag features and inertia mismatch to distinguish compensation of
+   physical disturbances from compensation of identification error.
+5. Compare collision response with and without the friction estimate and
+   identify which detector fires, false-trigger rates, and peak contact torque.
+6. Review related work before claiming novelty. Document failure conditions
+   and added computation alongside performance improvements.
 
-## The claim
+## Possible extensions after validation
 
-> A learned residual disturbance model, embedded as feedforward in a
-> condensed ADMM-solved MPC, measurably improves torque tracking and
-> disturbance rejection on a series-elastic actuator — and the same learned
-> friction model is what makes a collision observer sensitive without false
-> alarms — all at 2 kHz on an STM32G431.
-
-## Evidence (this repo)
-
-- **MPC vs PID on the same rig:** 5.7 vs 32.9 mN·m RMS torque tracking
-  (5.8×), 1.08 vs 15.8 mN·m steady-state disturbance error (15×).
-- **The learning adds a further, honest increment:** disturbance
-  steady-state error 1.08 → 0.91 mN·m; edge-rich tracking 28.0 → 24.1 mN·m;
-  smooth overall 15.6 → 13.2 mN·m. Held-out residual R² = 0.62.
-- **Safety:** collision detected in 102 ms with give-way, enabled by the
-  friction-aware observer.
-- **Portability:** the same math runs in Python (sim), MATLAB (design), and
-  C (firmware); the MPC constants are *generated* from the design tool, so
-  the deployed controller is provably the designed one.
-
-## Why it's novel enough to be interesting
-
-- **The compliant element is a design variable.** The spring is sized,
-  calibrated, and its error characterized (ks to 1.5%) — most SEA papers
-  take the spring from a datasheet.
-- **The learning/control split is principled, not ad hoc:** what is
-  observable from motor-side data (friction, cogging, ripple) is learned;
-  what is not (spring nonlinearity, invisible to a linear observer) is
-  calibrated externally. This is a clean, defensible design rule.
-- **Full embedded story:** condensed QP + warm-started ADMM + generated
-  Cholesky/gradient maps — the exact deployment pattern used in industry
-  (acados/OSQP-style) on a $20 part.
-
-## Foreseeable extensions (your next papers)
-
-1. **Online adaptation** — recursive least squares on the residual
-   coefficients at 1 kHz: the feedforward tracks slow parameter drift
-   (temperature, wear). Directly comparable to adaptive-control baselines.
-2. **Spring-aware MPC** — a second, nonlinear spring with the cubic term in
-   the prediction model; the calibration pipeline makes this a config
-   change, and the comparison "learned residual vs. modeled nonlinearity"
-   is a clean ablation.
-3. **Multi-DOF** — two SEAs on a 2-DOF arm with the same controller, which
-   tests the MPC's handling of coupling through the structure.
-4. **HIL validation** — the firmware on the ESC1 driving a real motor into
-   a hardware-in-the-loop load, closing the loop between the sim numbers
-   and the bench.
-
-## 30-second version
-
-"Nearly every controls résumé has a PID on a hobby servo. Mine has a
-torque-controlled series-elastic actuator where I wrote the FOC, the
-spring, the calibration, the MPC — solved in real time with ADMM on an
-STM32 — and a learned friction model that makes it both more accurate and
-safer. Sim says 6× better than PID; the hardware milestones are in the
-repo."
+Online parameter adaptation, nonlinear spring prediction, and coupled
+multi-actuator experiments are plausible follow-ups. Each introduces new
+stability and validation requirements; they are outside the present result.

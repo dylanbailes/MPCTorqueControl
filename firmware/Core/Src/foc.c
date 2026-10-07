@@ -12,11 +12,14 @@ void foc_init(FocCtl *f, float R, float L, float Ke, float v_max,
     (void)loop_hz;
     f->iq_ref = 0.0f; f->iq = 0.0f; f->id = 0.0f; f->iq_int = 0.0f;
     f->vd = 0.0f; f->vq = 0.0f; f->theta_e = 0.0f;
+    f->pole_pairs = 7;  /* legacy default; replace during commissioning */
+    f->electrical_offset = 0.0f;
 }
 
 void foc_set_torque(FocCtl *f, float iq_ref) { f->iq_ref = iq_ref; }
 
 void foc_clarke(float ia, float ib, float ic, float *i_alpha, float *i_beta) {
+    (void)ic;
     *i_alpha = ia;
     *i_beta = (ia + 2.0f * ib) / SQRT3;
 }
@@ -59,17 +62,17 @@ float foc_mech_to_elec(float theta_m, int pole_pairs) {
  * Drives the q-axis to iq_ref (PI + back-EMF feedforward, conditional
  * anti-windup), then SVPWM. */
 float foc_current_loop(FocCtl *f, float ia, float ib, float theta_m,
-                       float dt) {
+                       float omega_m, float dt) {
     float ic = -ia - ib;
     float i_alpha, i_beta, i_d, i_q;
     foc_clarke(ia, ib, ic, &i_alpha, &i_beta);
-    f->theta_e = foc_mech_to_elec(theta_m, 7);
+    f->theta_e = foc_mech_to_elec(theta_m, f->pole_pairs) + f->electrical_offset;
     foc_park(i_alpha, i_beta, f->theta_e, &i_d, &i_q);
     f->iq = i_q; f->id = i_d;
 
     float err = f->iq_ref - i_q;
     f->iq_int += f->ki * err * dt;
-    float vq = f->iq_int + f->kp * err + f->Ke * theta_m; /* back-EMF FF */
+    float vq = f->iq_int + f->kp * err + f->Ke * omega_m; /* back-EMF FF */
     float vq_sat = fmaxf(-f->v_max, fminf(f->v_max, vq));
     if (vq_sat != vq) f->iq_int -= f->ki * err * dt;      /* anti-windup */
     f->vq = vq_sat;

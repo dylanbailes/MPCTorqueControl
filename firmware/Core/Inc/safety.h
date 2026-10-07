@@ -1,6 +1,7 @@
 #ifndef SAFETY_H
 #define SAFETY_H
 
+#include <stdint.h>
 #include <math.h>
 
 typedef struct {

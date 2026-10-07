@@ -3,12 +3,11 @@
 
 #include <stdint.h>
 
-/* AS5048A magnetic encoder (14-bit) with filtered velocity (port of the
- * Savitzky-Golay approach used in learn/system_id.py — here a one-pole
- * filter on the wrapped angle difference). */
+/* AS5048A magnetic encoder (14-bit) with a one-pole filtered wrapped
+ * difference for velocity. System ID uses a separate offline estimator. */
 
 typedef struct {
-    uint16_t (*read_word)(uint8_t reg);   /* platform SPI read          */
+    uint16_t (*read_word)(uint16_t reg);  /* 14-bit SPI register address */
     float angle;                          /* [rad], 0..2pi              */
     float velocity;                       /* [rad/s], filtered          */
     float prev_angle;
@@ -16,7 +15,7 @@ typedef struct {
     uint8_t valid;
 } Encoder;
 
-void encoder_init(Encoder *e, uint16_t (*read_word)(uint8_t reg));
+void encoder_init(Encoder *e, uint16_t (*read_word)(uint16_t reg));
 float encoder_update(Encoder *e, float dt);   /* returns angle [rad] */
 
 #endif /* ENCODER_H */

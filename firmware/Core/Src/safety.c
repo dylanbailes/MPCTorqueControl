@@ -2,7 +2,7 @@
 
 /* Stall detector + safe-stop (port of model/impedance.py::ImpedanceSafety).
  * Fires when the load is pinned (|omega_l| ~ 0) while torque builds, and
- * on the momentum-observer residual; then the current command is ramped to
+ * on the filtered torque residual; then the current command is set to
  * zero ("give way"). */
 
 void safety_init(Safety *s, float tau_thresh, float stall_tau_thresh,
