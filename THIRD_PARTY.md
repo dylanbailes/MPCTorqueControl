@@ -1,7 +1,9 @@
 # Third-party material
 
 The root MIT license covers the original code and documentation in this
-repository. Dependencies retain their own licenses; they are installed from
+repository, including the project-authored custom CAD geometry in
+`hardware/cad/custom/`. Its manifest identifies each exported asset; linked
+supplier geometry is omitted. Dependencies retain their own licenses; they are installed from
 the requirements files rather than vendored.
 
 Downloaded models from ST, McMaster-Carr, GrabCAD, and other CAD sources are

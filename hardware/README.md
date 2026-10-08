@@ -9,7 +9,7 @@ simulation results.
 - [Spring design calculations](spring_design.py): run with `python hardware/spring_design.py`.
 - [Bill of materials](BOM.md): planning estimates and source links.
 - [Parts notes](parts/README.md): candidate specifications and acceptance checks.
-- [CAD reference inventory](cad/README.md): local downloaded geometry.
+- [Custom Fusion parts and CAD inventory](cad/README.md): current custom-part exports, inertia sweeps, and supplier reference notes.
 - [Hardware milestones](../docs/MILESTONES.md): measurements required for validation.
 
 Parts notes include earlier GM5208 design assumptions. For the selected 4015
