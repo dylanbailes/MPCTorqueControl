@@ -1,0 +1,256 @@
+{
+  "relative_volume_tolerance": 1e-05,
+  "checks": [
+    {
+      "file": "fusion/torsion_bar.f3d",
+      "body_count": 1,
+      "volume_match": true,
+      "max_relative_volume_error": 0.0,
+      "sketches": 1,
+      "features": 1
+    },
+    {
+      "file": "step/torsion_bar.step",
+      "body_count": 1,
+      "volume_match": true,
+      "max_relative_volume_error": 0.0,
+      "sketches": 0,
+      "features": 1
+    },
+    {
+      "file": "fusion/load_shaft_8mm.f3d",
+      "body_count": 1,
+      "volume_match": true,
+      "max_relative_volume_error": 0.0,
+      "sketches": 2,
+      "features": 2
+    },
+    {
+      "file": "step/load_shaft_8mm.step",
+      "body_count": 1,
+      "volume_match": true,
+      "max_relative_volume_error": 5.141945130947469e-06,
+      "sketches": 0,
+      "features": 1
+    },
+    {
+      "file": "fusion/motor_hub.f3d",
+      "body_count": 1,
+      "volume_match": true,
+      "max_relative_volume_error": 0.0,
+      "sketches": 0,
+      "features": 0
+    },
+    {
+      "file": "step/motor_hub.step",
+      "body_count": 1,
+      "volume_match": true,
+      "max_relative_volume_error": 2.564702637073587e-06,
+      "sketches": 0,
+      "features": 1
+    },
+    {
+      "file": "fusion/load_hub.f3d",
+      "body_count": 1,
+      "volume_match": true,
+      "max_relative_volume_error": 0.0,
+      "sketches": 0,
+      "features": 0
+    },
+    {
+      "file": "step/load_hub.step",
+      "body_count": 1,
+      "volume_match": true,
+      "max_relative_volume_error": 6.918488304796658e-07,
+      "sketches": 0,
+      "features": 1
+    },
+    {
+      "file": "fusion/motor_mount.f3d",
+      "body_count": 1,
+      "volume_match": true,
+      "max_relative_volume_error": 1.6420468465026492e-15,
+      "sketches": 0,
+      "features": 0
+    },
+    {
+      "file": "step/motor_mount.step",
+      "body_count": 1,
+      "volume_match": true,
+      "max_relative_volume_error": 2.9556843237047684e-15,
+      "sketches": 0,
+      "features": 1
+    },
+    {
+      "file": "fusion/bearing_block.f3d",
+      "body_count": 1,
+      "volume_match": true,
+      "max_relative_volume_error": 0.0,
+      "sketches": 3,
+      "features": 6
+    },
+    {
+      "file": "step/bearing_block.step",
+      "body_count": 1,
+      "volume_match": true,
+      "max_relative_volume_error": 1.610637341032174e-13,
+      "sketches": 0,
+      "features": 1
+    },
+    {
+      "file": "fusion/extrusion_bracket.f3d",
+      "body_count": 2,
+      "volume_match": true,
+      "max_relative_volume_error": 0.0,
+      "sketches": 6,
+      "features": 8
+    },
+    {
+      "file": "step/extrusion_bracket.step",
+      "body_count": 2,
+      "volume_match": true,
+      "max_relative_volume_error": 2.7336697875178675e-07,
+      "sketches": 0,
+      "features": 1
+    },
+    {
+      "file": "fusion/inertial_disk.f3d",
+      "body_count": 1,
+      "volume_match": true,
+      "max_relative_volume_error": 0.0,
+      "sketches": 1,
+      "features": 1
+    },
+    {
+      "file": "step/inertial_disk.step",
+      "body_count": 1,
+      "volume_match": true,
+      "max_relative_volume_error": 0.0,
+      "sketches": 0,
+      "features": 1
+    }
+  ],
+  "source_modified_after": false,
+  "mesh_checks": [
+    {
+      "file": "stl/motor_hub.stl",
+      "triangles": 56394,
+      "bbox_mm": [
+        [
+          -21.741519927978516,
+          28.143178939819336,
+          3.6897647380828857
+        ],
+        [
+          8.258480072021484,
+          45.1431770324707,
+          33.68983459472656
+        ]
+      ],
+      "max_bbox_difference_mm": 6.993114948272705e-05
+    },
+    {
+      "file": "stl/load_hub.stl",
+      "triangles": 27880,
+      "bbox_mm": [
+        [
+          -17.741411209106445,
+          15.143178939819336,
+          7.689764499664307
+        ],
+        [
+          4.258480072021484,
+          45.1431770324707,
+          29.68956184387207
+        ]
+      ],
+      "max_bbox_difference_mm": 0.00020281970500946045
+    },
+    {
+      "file": "stl/motor_mount.stl",
+      "triangles": 11140,
+      "bbox_mm": [
+        [
+          -15.25,
+          0.0,
+          -55.25
+        ],
+        [
+          15.25,
+          40.0,
+          10.0
+        ]
+      ],
+      "max_bbox_difference_mm": 2.1316282072803006e-14
+    },
+    {
+      "file": "stl/bearing_block.stl",
+      "triangles": 5188,
+      "bbox_mm": [
+        [
+          -15.5,
+          -20.0,
+          -20.0
+        ],
+        [
+          15.0,
+          50.0,
+          20.0
+        ]
+      ],
+      "max_bbox_difference_mm": 3.552713678800501e-15
+    },
+    {
+      "file": "stl/extrusion_bracket_body_1.stl",
+      "triangles": 4788,
+      "bbox_mm": [
+        [
+          0.0,
+          -1.5,
+          -50.0
+        ],
+        [
+          20.0,
+          50.0,
+          9.244463733058732e-32
+        ]
+      ],
+      "max_bbox_difference_mm": 2.220446049250313e-16
+    },
+    {
+      "file": "stl/extrusion_bracket_body_2.stl",
+      "triangles": 1044,
+      "bbox_mm": [
+        [
+          7.099999904632568,
+          10.09999942779541,
+          0.0
+        ],
+        [
+          12.90000057220459,
+          47.900001525878906,
+          1.5
+        ]
+      ],
+      "max_bbox_difference_mm": 1.5258789076710855e-06
+    },
+    {
+      "file": "stl/inertial_disk.stl",
+      "triangles": 3592,
+      "bbox_mm": [
+        [
+          -35.0,
+          -34.99876403808594,
+          0.0
+        ],
+        [
+          34.995059967041016,
+          34.99876403808594,
+          6.0
+        ]
+      ],
+      "max_bbox_difference_mm": 0.004940032958984375
+    }
+  ],
+  "mesh_bbox_tolerance_mm": 0.03
+}

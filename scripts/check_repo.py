@@ -1,5 +1,6 @@
 """Check publishable files, local Markdown links, and evidence consistency."""
 
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -36,14 +37,42 @@ def exact_case_exists(path):
     return current.exists()
 
 
+def cleared_custom_cad(errors):
+    """Allow only individually documented, hashed custom CAD snapshots."""
+    manifest_path = ROOT / "hardware/cad/custom/manifest.json"
+    allowed = set()
+    if not manifest_path.exists():
+        return allowed
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        custom_root = manifest_path.parent
+        for part in manifest["parts"]:
+            if part.get("provenance") != "Project-authored custom geometry; linked supplier children omitted":
+                errors.append(f"Uncleared custom CAD provenance: {part.get('slug')}")
+                continue
+            for name in part["files"]:
+                path = (custom_root / name).resolve()
+                if not path.is_relative_to(custom_root) or path.suffix.lower() not in {".step", ".stl", ".f3d"}:
+                    errors.append(f"Invalid custom CAD manifest path: {name}")
+                    continue
+                if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != part.get("sha256", {}).get(name):
+                    errors.append(f"Custom CAD hash differs from reviewed snapshot: {name}")
+                    continue
+                allowed.add(path)
+    except (ValueError, KeyError, TypeError):
+        errors.append("Invalid custom CAD manifest")
+    return allowed
+
+
 def main():
     errors = []
+    cleared_cad = cleared_custom_cad(errors)
     files = [path for path in candidates() if path.is_file()]
     for path in files:
         relative = path.relative_to(ROOT)
         if relative.parts[0] in PRIVATE_ROOTS:
             errors.append(f"Local-only file tracked: {relative}")
-        if path.suffix.lower() in {".step", ".stl"}:
+        if path.suffix.lower() in {".step", ".stl", ".f3d", ".f3z"} and path not in cleared_cad:
             errors.append(f"Uncleared CAD asset tracked: {relative}")
         if path.suffix.lower() not in {".md", ".py", ".c", ".h", ".json", ".yml", ".txt"}:
             continue

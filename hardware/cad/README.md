@@ -1,4 +1,17 @@
-# CAD references
+# CAD parts and references
+
+The [current custom Fusion parts](custom/README.md) include eight independent
+Fusion archives, STEP solids, and millimeter STL meshes. The current assembly
+disk is 70 × 6 mm; its [as-modeled inertia sweep](inertial_disk/as_modeled/calculations.json)
+uses that exact geometry. The export manifest separates original feature history
+from clean solid snapshots where supplier children were omitted.
+
+The [proposed adjustable inertial disk](../parts/inertial_disk.md) has a
+dimensioned reference, an importable DXF profile, and calculated symmetric
+weight configurations in `inertial_disk/compact/` and `inertial_disk/raised/`.
+The compact swept envelope clears the modeled rails/braces at the recorded
+placement. The new mounting collar, strength and operating speed remain
+provisional; these are not released manufacturing drawings.
 
 This directory documents reference geometry used during mechanical planning.
 Downloaded STEP files and local STL exports are ignored by Git pending
@@ -14,6 +27,5 @@ provider and verify dimensions against the actual parts before use.
 | `2020_Extruded_Aluminum_600mm.STEP` | Extrusion reference; verify slot geometry |
 
 The [Fusion design plan](../../docs/plan/fusion_cad_plan.md) records the earlier
-assembly approach. It contains legacy motor geometry and placeholders. A
-finished native assembly and validated manufacturing exports are not supplied
-in this public repository. See [third-party terms](../../THIRD_PARTY.md).
+assembly approach. It contains legacy motor geometry and placeholders. A complete assembly archive and validated manufacturing
+releases are not supplied; the current custom-part snapshots are available above. See [third-party terms](../../THIRD_PARTY.md).

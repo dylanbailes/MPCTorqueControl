@@ -1,0 +1,340 @@
+{
+  "source_document": "Full Assembly FOR SEA",
+  "source_version": 15,
+  "export_date": "2026-10-07",
+  "units": "mm",
+  "status": "as-modeled prototype; not validated manufacturing releases",
+  "supplier_reference_policy": "No supplier geometry exported. Parts with supplier children use isolated body copies.",
+  "parts": [
+    {
+      "source_name": "Torsion bar",
+      "slug": "torsion_bar",
+      "source_sketches": 1,
+      "source_features": 1,
+      "native_history": "parametric",
+      "omitted_linked_children": [],
+      "bodies": [
+        {
+          "name": "Body1",
+          "volume_mm3": 1605.1574964435697,
+          "bbox_mm": [
+            [
+              -1.25,
+              0.0,
+              -1.25
+            ],
+            [
+              1.25,
+              327.0,
+              1.25
+            ]
+          ],
+          "cad_material": "Steel, Carbon"
+        }
+      ],
+      "files": [
+        "fusion/torsion_bar.f3d",
+        "step/torsion_bar.step"
+      ],
+      "provenance": "Project-authored custom geometry; linked supplier children omitted",
+      "sha256": {
+        "fusion/torsion_bar.f3d": "b2feb012c6a702f424cb24a7afda5be4e1842dbabedb8be1db135d984dd7ef8b",
+        "step/torsion_bar.step": "4e43e259324fbf466075aab59917dfb3c549a3f847921071a8ff69e73d606b15"
+      }
+    },
+    {
+      "source_name": "8mm shaft",
+      "slug": "load_shaft_8mm",
+      "source_sketches": 2,
+      "source_features": 2,
+      "native_history": "parametric",
+      "omitted_linked_children": [],
+      "bodies": [
+        {
+          "name": "Body1",
+          "volume_mm3": 9976.15397446745,
+          "bbox_mm": [
+            [
+              -4.0,
+              0.0,
+              -4.0
+            ],
+            [
+              4.0,
+              200.0,
+              4.0
+            ]
+          ],
+          "cad_material": "Steel"
+        }
+      ],
+      "files": [
+        "fusion/load_shaft_8mm.f3d",
+        "step/load_shaft_8mm.step"
+      ],
+      "provenance": "Project-authored custom geometry; linked supplier children omitted",
+      "sha256": {
+        "fusion/load_shaft_8mm.f3d": "4fac20a33dfa66340bae6dd6f6350c557c03ba693ad6d05bf01b398c8967aff2",
+        "step/load_shaft_8mm.step": "44c3e43dadc147033bc26ccd87fc3505df8ab624144ab683f5cc72e0eda7b178"
+      }
+    },
+    {
+      "source_name": "Hub for Motor",
+      "slug": "motor_hub",
+      "source_sketches": 8,
+      "source_features": 12,
+      "native_history": "geometry_only",
+      "omitted_linked_children": [
+        "AS5600+4015 Motor",
+        "6436K312_Clamping Two-Piece Shaft Collar"
+      ],
+      "bodies": [
+        {
+          "name": "Body1",
+          "volume_mm3": 6345.8607233886305,
+          "bbox_mm": [
+            [
+              -21.741520017385483,
+              28.143178524471672,
+              3.6897646635770798
+            ],
+            [
+              8.258479982614517,
+              45.14317852447167,
+              33.68976466357708
+            ]
+          ],
+          "cad_material": "Steel"
+        }
+      ],
+      "files": [
+        "fusion/motor_hub.f3d",
+        "step/motor_hub.step",
+        "stl/motor_hub.stl"
+      ],
+      "provenance": "Project-authored custom geometry; linked supplier children omitted",
+      "sha256": {
+        "fusion/motor_hub.f3d": "b8ba9cf4b21f36cae2c407f71b6cc54bc416fe924488c4039ab63c1e3c26fadb",
+        "step/motor_hub.step": "91620d79989484bef20668033924e22cb9bf1cfc5fa7ff73e91d2d2f882fe112",
+        "stl/motor_hub.stl": "7ee8fa6448f4cdf223e7408966dd64c26fee9a5f80d38697c1f3e815952c7e0f"
+      }
+    },
+    {
+      "source_name": "Hub for Load Disc",
+      "slug": "load_hub",
+      "source_sketches": 10,
+      "source_features": 11,
+      "native_history": "geometry_only",
+      "omitted_linked_children": [
+        "AS5600+4015 Motor",
+        "6436K312_Clamping Two-Piece Shaft Collar"
+      ],
+      "bodies": [
+        {
+          "name": "Body1",
+          "volume_mm3": 8724.300979880962,
+          "bbox_mm": [
+            [
+              -17.741520017385483,
+              15.143178524471672,
+              7.689764663577079
+            ],
+            [
+              4.258479982614518,
+              45.14317852447167,
+              29.68976466357708
+            ]
+          ],
+          "cad_material": "Steel"
+        }
+      ],
+      "files": [
+        "fusion/load_hub.f3d",
+        "step/load_hub.step",
+        "stl/load_hub.stl"
+      ],
+      "provenance": "Project-authored custom geometry; linked supplier children omitted",
+      "sha256": {
+        "fusion/load_hub.f3d": "0c2b94dcf63f2f7083919ef32ea0fe382157520c60e9a9491d993bd5d8145833",
+        "step/load_hub.step": "0763be7f1193cc1e21431cc38983c66ed73509653cf1650a43bebcc3be9aeec9",
+        "stl/load_hub.stl": "aaaba4714bf9b47f80f81a2dd12d5acfafe621277c2a25f116b95e915dfb6a88"
+      }
+    },
+    {
+      "source_name": "Motor Mount",
+      "slug": "motor_mount",
+      "source_sketches": 4,
+      "source_features": 7,
+      "native_history": "geometry_only",
+      "omitted_linked_children": [
+        "Modular+Extrusion+PG20+-+T-Slot"
+      ],
+      "bodies": [
+        {
+          "name": "Body1",
+          "volume_mm3": 44310.29254543066,
+          "bbox_mm": [
+            [
+              -15.249999999999996,
+              0.0,
+              -55.24999999999998
+            ],
+            [
+              15.250000000000005,
+              40.0,
+              10.000000000000009
+            ]
+          ],
+          "cad_material": "Steel"
+        }
+      ],
+      "files": [
+        "fusion/motor_mount.f3d",
+        "step/motor_mount.step",
+        "stl/motor_mount.stl"
+      ],
+      "provenance": "Project-authored custom geometry; linked supplier children omitted",
+      "sha256": {
+        "fusion/motor_mount.f3d": "7dfccb6eba312a9ca23000a737b4b5469c7ef462a5bbe54de7e899cd23980a08",
+        "step/motor_mount.step": "2a7dceea1799ecca659a0807d484ed8682589904dbaa871b25f976c4bb46aba2",
+        "stl/motor_mount.stl": "db6630ee1e2125ea8d7a47044093a3b0c7ab8521cdcbfd2cca35131426e28fb0"
+      }
+    },
+    {
+      "source_name": "Bearing Bloc 1",
+      "slug": "bearing_block",
+      "source_sketches": 3,
+      "source_features": 6,
+      "native_history": "parametric",
+      "omitted_linked_children": [],
+      "bodies": [
+        {
+          "name": "Body1",
+          "volume_mm3": 31599.493079302934,
+          "bbox_mm": [
+            [
+              -15.500000000000004,
+              -20.0,
+              -20.0
+            ],
+            [
+              15.0,
+              50.0,
+              20.0
+            ]
+          ],
+          "cad_material": "Steel"
+        }
+      ],
+      "files": [
+        "fusion/bearing_block.f3d",
+        "step/bearing_block.step",
+        "stl/bearing_block.stl"
+      ],
+      "provenance": "Project-authored custom geometry; linked supplier children omitted",
+      "sha256": {
+        "fusion/bearing_block.f3d": "6ebcc5bdff14e7747bd41cfdca1f7444b235ae89b66767d3f2b3dee3ceff8190",
+        "step/bearing_block.step": "54e13056ae4f0ed373299068b0cedd563cc47710e53a4d861c3975529ba626e8",
+        "stl/bearing_block.stl": "d8a2b195986fb1f2a50b36adccc49b6598b7633f9094ae67b78f79b13ec3bc85"
+      }
+    },
+    {
+      "source_name": "20x20 Bracket",
+      "slug": "extrusion_bracket",
+      "source_sketches": 6,
+      "source_features": 8,
+      "native_history": "parametric",
+      "omitted_linked_children": [],
+      "bodies": [
+        {
+          "name": "Body1",
+          "volume_mm3": 21240.7451146279,
+          "bbox_mm": [
+            [
+              0.0,
+              -1.5000000000000002,
+              -50.0
+            ],
+            [
+              20.0,
+              50.0,
+              0.0
+            ]
+          ],
+          "cad_material": "Steel"
+        },
+        {
+          "name": "Body2",
+          "volume_mm3": 246.75631226804254,
+          "bbox_mm": [
+            [
+              7.1000001490116125,
+              10.099999509042652,
+              0.0
+            ],
+            [
+              12.900000020136702,
+              47.9,
+              1.5000000000000002
+            ]
+          ],
+          "cad_material": "Steel"
+        }
+      ],
+      "files": [
+        "fusion/extrusion_bracket.f3d",
+        "step/extrusion_bracket.step",
+        "stl/extrusion_bracket_body_1.stl",
+        "stl/extrusion_bracket_body_2.stl"
+      ],
+      "provenance": "Project-authored custom geometry; linked supplier children omitted",
+      "sha256": {
+        "fusion/extrusion_bracket.f3d": "89ad0d7dfc3ce7bbbc47cd2d8926a369ac00e0a12f31d1e94b4ba5a4947a4639",
+        "step/extrusion_bracket.step": "7274cdc126cc333ad400865d31e659d90f41f3352ea4b6c83703f42b546e3992",
+        "stl/extrusion_bracket_body_1.stl": "0113b69110d43569b0d58cae947637e5f9522b9cccd12ae69ce170c0558c0a05",
+        "stl/extrusion_bracket_body_2.stl": "99483b04f035e9241a84bc160c946dfe9e92224612f548f8f84641b67ef67f3b"
+      }
+    },
+    {
+      "source_name": "inertial disc",
+      "slug": "inertial_disk",
+      "source_sketches": 1,
+      "source_features": 1,
+      "native_history": "parametric",
+      "omitted_linked_children": [],
+      "bodies": [
+        {
+          "name": "Body1",
+          "volume_mm3": 21084.92475827395,
+          "bbox_mm": [
+            [
+              -35.0,
+              -35.0,
+              0.0
+            ],
+            [
+              35.0,
+              35.0,
+              6.000000000000001
+            ]
+          ],
+          "cad_material": "Steel"
+        }
+      ],
+      "files": [
+        "fusion/inertial_disk.f3d",
+        "step/inertial_disk.step",
+        "stl/inertial_disk.stl"
+      ],
+      "provenance": "Project-authored custom geometry; linked supplier children omitted",
+      "sha256": {
+        "fusion/inertial_disk.f3d": "eec30072db0c4583af4555abaf4d18c5c070313ed40bacb9d7e54022789ab5ba",
+        "step/inertial_disk.step": "95a6b2cffa795095bac2bb404c917d81c374984742a72e25c269397a6f0aca5c",
+        "stl/inertial_disk.stl": "7c4e786c69e6202920609a742f925d2849054e9fca7807725722a71117cc482c"
+      }
+    }
+  ],
+  "source_modified_before": false,
+  "source_modified_after": false,
+  "volume_calculation_accuracy": "VeryHighCalculationAccuracy"
+}
